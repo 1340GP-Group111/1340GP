@@ -1,3 +1,6 @@
+#include <vector>
+#include <deque>
+
 #ifndef MAP
 #define MAP
 #endif

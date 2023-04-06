@@ -5,6 +5,7 @@
 #ifndef BLOCK
 #include "block.h"
 #endif
+#include "gameMap.h"
 
 class Player{
 public:

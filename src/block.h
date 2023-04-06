@@ -1,3 +1,5 @@
+#include <string>
+
 #ifndef BLOCK
 #define BLOCK
 #endif
