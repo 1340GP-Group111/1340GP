@@ -8,8 +8,8 @@
 #include "gameMap.h"
 #endif
 
-void printLine(string);
+void printLine(std::string);
 void printMap(const Map&, const Player&);
 void flush();
 
-string interact(string);
+std::string interact(std::string);

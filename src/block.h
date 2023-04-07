@@ -7,10 +7,10 @@
 class Block{
 public:
     Block();
-    Block(char, string, int, int, int);
+    Block(char, std::string, int, int, int);
 private:
     char appearance;
-    string id;
+    std::string id;
     int blood;
     int value;
     int status;

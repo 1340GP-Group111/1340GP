@@ -1,9 +1,1 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-int main()
-{
-    cout << "Hello" << endl;
-
-    return 0;
-}
+#include <curses.h>

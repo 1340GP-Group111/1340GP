@@ -11,7 +11,7 @@
 
 class Map{
 public:
-    deque<vector<Block>> mp;
+    std::deque<std::vector<Block>> mp;
 
     Map();
     Map(int, int);
