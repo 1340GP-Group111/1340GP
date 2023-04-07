@@ -15,7 +15,7 @@
 #ifndef IO
 #include "io.h"
 void printLine(std::string);
-void printMap(const Map&, const Player&);
+void printMap(deque<vector<block>> deque_1,player p);
 void flush();
 
 std::string interact(std::string);
