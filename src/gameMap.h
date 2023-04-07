@@ -12,14 +12,11 @@
 class Map{
 public:
     std::deque<std::vector<Block>> mp;
-
     Map();
     Map(int, int);
-
-    void clear(int, int);
-    void clear(int, int, int, int);
     void generateLine(const Player&);
-    void pop(int);
+    void show_map(const Player&);
 private:
     int width, height;
 };
+class Map{
