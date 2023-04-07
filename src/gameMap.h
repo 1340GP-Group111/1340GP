@@ -1,5 +1,7 @@
 #include <vector>
 #include <deque>
+#include <random>
+#include <ctime>
 
 #ifndef MAP
 #define MAP
