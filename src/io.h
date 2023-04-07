@@ -12,8 +12,11 @@
 #include "player.h"
 #endif
 
+#ifndef IO
+#include "io.h"
 void printLine(std::string);
 void printMap(const Map&, const Player&);
 void flush();
 
 std::string interact(std::string);
+#endif
