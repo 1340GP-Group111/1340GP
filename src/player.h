@@ -29,6 +29,9 @@ public:
     int getAttack() const;
     void setAttack(int newAttack);
     
+    //for IO
+    int get_x()
+    int get_y()
 private:
     char appearance;
     int level;
