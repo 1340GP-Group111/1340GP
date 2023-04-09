@@ -1,11 +1,11 @@
-#include <string>
+#ifndef IO
+#define IO
 
+#include <string>
 #include "block.h"
 #include "gameMap.h"
 #include "player.h"
 
-#ifndef IO
-#define IO
 void printLine(std::string);
 void printMap(deque<vector<block>> deque_1,player p);
 void flush();
