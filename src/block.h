@@ -1,8 +1,7 @@
-#include <string>
-
 #ifndef BLOCK
 #define BLOCK
-#endif
+
+#include <string>
 
 class Block{
 private:
@@ -46,3 +45,5 @@ Block s_3("yellow",'$','$',1,80,1)
 Block s_4("red",'$','$',1,160,1)
 Block s_5("pink",'$','$',1,320,1)
 Block s_6("cyan",'$','$',1,640,1)
+
+#endif

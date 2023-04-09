@@ -1,15 +1,11 @@
+#ifndef MAP
+#define MAP
+
 #include <vector>
 #include <deque>
 #include <random>
 #include <ctime>
-
-#ifndef MAP
-#define MAP
-#endif
-
-#ifndef PLAYER
 #include "player.h"
-#endif
 
 class Map{
 public:
@@ -21,4 +17,5 @@ public:
 private:
     int width, height;
 };
-class Map{
+
+#endif

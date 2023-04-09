@@ -1,9 +1,7 @@
 #ifndef PLAYER
 #define PLAYER
 
-#ifndef BLOCK
 #include "block.h"
-#endif
 #include "gameMap.h"
 
 class Player{
