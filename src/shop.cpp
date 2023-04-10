@@ -18,7 +18,7 @@ void Shop::showShop(Player &player){
     std::cout << std::endl;
 }
 
-void Shop::buyAppearance(Player &player, std::vector<char> &availableSkins, std::vector<char> &ownedSkins){ 
+void Shop::buyAppearance(Player &player){
     int option,choice;
     std::cout << "Choose an appearance to buy (enter 0 to exit):" << std::endl;
     // if not own, permitted to buy the skin 
@@ -62,7 +62,7 @@ void Shop::buyAppearance(Player &player, std::vector<char> &availableSkins, std:
     }
 }
 
-void Shop::equipAppearance(Player& player, std::vector<char>& ownedSkins) {
+void Shop::equipAppearance(Player& player) {
     int option;
     std::cout << "Choose an appearance to equip (enter 0 to exit):" << std::endl;
     // list available owned skins
