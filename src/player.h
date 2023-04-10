@@ -31,13 +31,13 @@ public:
 
     //getters and setters
 
-    int getWealth();
+    int getWealth() const;
     void setWealth(int wealth);
 
-    char getAppearance();
+    char getAppearance() const;
     void setAppearance(char appearance);
 
-    int getBombNum();
+    int getBombNum() const;
     void setBombNum(int bombNum);
 
     int getDamage();

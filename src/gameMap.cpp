@@ -1,6 +1,6 @@
 #include "gameMap.h"
 
-void Map::Map(int height_, int width_){ 
+Map::Map(int height_, int width_){
 	width = width_;
 	height = height_;
 	for (int i=1;i<=height/2;i++){
@@ -21,7 +21,7 @@ void Map::Map(int height_, int width_){
 	}
 }
 
-void Map::Map(){
+Map::Map(){
 	width = 20;
 	height = 12;
 	for (int i=1;i<=height/2;i++){

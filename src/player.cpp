@@ -71,7 +71,7 @@ void Player::bomb(Map &mp){
 //getters and setters
 //wealth
 
-int Player::getWealth(){
+int Player::getWealth() const{
     return wealth;
 }
 
@@ -80,7 +80,7 @@ void Player::setWealth(int wealth) {
 }
 //appearance
 
-char Player::getAppearance(){
+char Player::getAppearance() const{
     return appearance;
 }
 
@@ -91,7 +91,7 @@ void Player::setAppearance(char appearance) {
 
 //bombNum
 
-int Player::getBombNum(){
+int Player::getBombNum() const{
     return bombNum;
 }
 
