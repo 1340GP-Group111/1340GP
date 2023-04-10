@@ -112,14 +112,14 @@ void Shop::buyTime(Player &player, int &time){
         player.setWealth(player.getWealth() - TIME_PRICE);
         // amount of time added per purchase, undetermind 
         time += 0;
-        cout << "You bought 0 minutes of time. You now have " << time << " minutes now." << endl;
+        std::cout << "You bought 0 minutes of time. You now have " << time << " minutes now." << std::endl;
     }else{
-        cout << "You don't have enough gold coins." << endl;
+        std::cout << "You don't have enough gold coins." << std::endl;
     }
     return;
 }
 
 void Shop::exitShop(){
-    cout << "Thank you for visiting the shop!" << endl;
+    std::cout << "Thank you for visiting the shop!" << std::endl;
     return;
 }
