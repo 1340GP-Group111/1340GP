@@ -2,10 +2,13 @@
 #include <iostream>
 #include <algorithm>
 
+Shop::Shop(){
+    availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now
+    ownedSkins = {'@'}; // owned skins
+};
+
 void Shop::showShop(Player &player){
-    std::vector<char> availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now
-    std::vector<char> ownedSkins = {'@'}; // owned skins
-    std::cout << "Welcome to the shop!" << std::endl; ? // show shop
+    std::cout << "Welcome to the shop!" << std::endl; // show shop
     std::cout << "You have " << player.getWealth() << " coins." << std::endl; // should add getElement() in player
     std::cout << "1. Buy appearance" << std::endl;
     std::cout << "2. Buy bomb: " << BOMB_PRICE << " coins." << std::endl;
@@ -82,7 +85,6 @@ void Shop::equipAppearance(Player& player, std::vector<char>& ownedSkins) {
     }
     player.setAppearance(selectedSkin);
     std::cout << "You equipped a new appearance." << std::endl;
-    return;
 }
 
 void Shop::buyBomb(Player &player){
@@ -93,33 +95,29 @@ void Shop::buyBomb(Player &player){
     }else{
         std::cout << "You don't have enough coins." << std::endl;
     }
-    return;
 }
 void Shop::buyAttack(Player &player){
     if(player.getWealth() >= ATTACK_PRICE){
         player.setWealth(player.getWealth() - ATTACK_PRICE);
-        // amount of attack added per purchase, undetermind 
-        player.setAttack(player.getAttack() + 0);
-        std::cout << "You bought an attack. You now have " << player.getAttack() << " attack." << std::endl;
+        // amount of attack added per purchase, undetermined
+        player.setDamage(player.getDamage() + 0);
+        std::cout << "You bought an attack. You now have " << player.getDamage() << " attack." << std::endl;
     }else{
         std::cout << "You don't have enough gold coins." << std::endl;
     }
-    return;
 }
 
 void Shop::buyTime(Player &player, int &time){
     if(player.getWealth() >= TIME_PRICE){
         player.setWealth(player.getWealth() - TIME_PRICE);
-        // amount of time added per purchase, undetermind 
+        // amount of time added per purchase, undetermined
         time += 0;
         std::cout << "You bought 0 minutes of time. You now have " << time << " minutes now." << std::endl;
     }else{
         std::cout << "You don't have enough gold coins." << std::endl;
     }
-    return;
 }
 
 void Shop::exitShop(){
     std::cout << "Thank you for visiting the shop!" << std::endl;
-    return;
 }
