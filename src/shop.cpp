@@ -5,7 +5,7 @@
 Shop::Shop(){
     availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now
     ownedSkins = {'@'}; // owned skins
-};
+}
 
 void Shop::showShop(Player &player){
     std::cout << "Welcome to the shop!" << std::endl; // show shop

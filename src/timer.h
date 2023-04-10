@@ -1,4 +1,6 @@
-// Author: Cao Rui
+//
+// Created by Cao Rui on 2023/4/7.
+//
 
 #ifndef TIMER
 #define TIMER
@@ -9,10 +11,18 @@ class Timer{
 public:
     Timer();
 
+    // @brief: Start Timer.
+    // @param: The time limit.
     void start(int);
+
+    // @brief: Check if the time limit is reached.
+    // @return: Return 1 if timeout, 0 otherwise.
     bool timeout();
 private:
     static bool timeout_flag;
+
+    // @brief: Wait until reach the time limit in a new thread.
+    // @param: Receive the time limit.
     static void wait(int);
 };
 
