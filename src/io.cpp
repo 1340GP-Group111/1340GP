@@ -1,6 +1,7 @@
 #include "io.h"
 #include <fstream>
 #include <string>
+#include "player.h"
 
 long long encode(const std::string &s){         // Generate the hash code of the player info.
     long long sum = 0;
