@@ -8,13 +8,13 @@ class Shop {
     private:
         std::vector<char> availableSkins;
         std::vector<char> ownedSkins;
-        static const int APPEARANCE_PRICE = 0; // appearance price
-        static const int BOMB_PRICE = 0; // bomb price
-        static const int ATTACK_PRICE = 0; // attack price
-        static const int TIME_PRICE = 0; // time price, time is priceless lol, time is gold!
+        int APPEARANCE_PRICE;
+        int BOMB_PRICE;
+        int ATTACK_PRICE;
+        int TIME_PRICE;
     public:
         Shop();
-        static void showShop(Player &player);
+        void showShop(Player &player) const;
         void buyAppearance(Player &player);
         void equipAppearance(Player &player);
         void buyBomb(Player &player);

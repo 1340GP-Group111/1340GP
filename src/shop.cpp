@@ -5,9 +5,13 @@
 Shop::Shop(){
     availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now
     ownedSkins = {'@'}; // owned skins
+    APPEARANCE_PRICE = 0; // appearance price
+    BOMB_PRICE = 0; // bomb price
+    ATTACK_PRICE = 0; // attack price
+    TIME_PRICE = 0;// time price, time is priceless lol, time is gold!
 }
 
-void Shop::showShop(Player &player){
+void Shop::showShop(Player &player) const{
     std::cout << "Welcome to the shop!" << std::endl; // show shop
     std::cout << "You have " << player.getWealth() << " coins." << std::endl; // should add getElement() in player
     std::cout << "1. Buy appearance" << std::endl;
@@ -92,6 +96,7 @@ void Shop::buyBomb(Player &player){
         player.setWealth(player.getWealth() - BOMB_PRICE);
         player.setBombNum(player.getBombNum() + 1);
         std::cout << "You bought a bomb. You now have " << player.getBombNum() << " bombs now." << std::endl;
+        BOMB_PRICE*=10;
     }else{
         std::cout << "You don't have enough coins." << std::endl;
     }
@@ -102,6 +107,7 @@ void Shop::buyAttack(Player &player){
         // amount of attack added per purchase, undetermined
         player.setDamage(player.getDamage() + 0);
         std::cout << "You bought an attack. You now have " << player.getDamage() << " attack." << std::endl;
+        ATTACK_PRICE*=10;
     }else{
         std::cout << "You don't have enough gold coins." << std::endl;
     }
@@ -113,6 +119,7 @@ void Shop::buyTime(Player &player, int &time){
         // amount of time added per purchase, undetermined
         time += 0;
         std::cout << "You bought 0 minutes of time. You now have " << time << " minutes now." << std::endl;
+        TIME_PRICE*=10;
     }else{
         std::cout << "You don't have enough gold coins." << std::endl;
     }
