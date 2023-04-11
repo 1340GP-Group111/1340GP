@@ -101,7 +101,7 @@ void Player::setBombNum(int bombNum) {
 
 //damage
 
-int Player::getDamage(){
+int Player::getDamage() const{
     return Damage;
 }
 
@@ -126,7 +126,7 @@ void Player::setLocation(int x,int y){
 
 //score
 
-int Player::getScore(){
+int Player::getScore() const{
     return score;
 }
 

@@ -1,6 +1,7 @@
-#include "io.h"
 #include <fstream>
 #include <string>
+#include <iostream>
+#include "io.h"
 #include "player.h"
 
 long long encode(const std::string &s){         // Generate the hash code of the player info.
@@ -43,7 +44,7 @@ int loadFromFile(Player& player){
     player.setWealth(wealth);
     player.setBombNum(bomb);
     player.setAppearance(appearance);
-    player.setScore(score)
+    player.setScore(score);
 
     return 0;           // Load successfully.
     

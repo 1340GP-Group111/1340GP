@@ -40,16 +40,16 @@ public:
     int getBombNum() const;
     void setBombNum(int bombNum);
 
-    int getDamage();
+    int getDamage() const;
     void setDamage(int damage);
 
     int getX() const;
     int getY() const;
     void setLocation(int x,int y);
 
-    int getDepth();
+    int getDepth() const;
 
-    int getScore();
+    int getScore() const;
     void setScore(int score);
 
     //Reset score, depth, x, y when starting a new game
