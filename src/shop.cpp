@@ -3,7 +3,7 @@
 #include <algorithm>
 
 Shop::Shop(){
-    availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now
+    availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now. We can have "☺","☹","♚","☃","☠"
     ownedSkins = {'@'}; // owned skins
     APPEARANCE_PRICE = 0; // appearance price
     BOMB_PRICE = 0; // bomb price
