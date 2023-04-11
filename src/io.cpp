@@ -46,4 +46,11 @@ int loadFromFile(Player& player){
     player.setScore(score)
 
     return 0;           // Load successfully.
+    
+}
+
+void flush(){
+    for(int i=0;i<50;i++){
+        std::cout<<std::endl;
+    }
 }
