@@ -13,12 +13,12 @@ private:
     int status;
 
 public:   
-    std::string get_id();
-    char get_appearance();
+    std::string get_id() const;
+    char get_appearance() const;
     char get_breaking_app();
     int get_health();
     int get_value();
-    int get_status();
+    int get_status() const;
     
     Block();
     Block(std::string id_, char appearance_, char breaking_app_, int health_, int value_, int status_);

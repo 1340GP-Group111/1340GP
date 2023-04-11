@@ -2,3 +2,4 @@ src/.idea/
 .idea/
 src/*.o
 src/main
+test*

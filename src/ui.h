@@ -6,18 +6,31 @@
 #define SRC_UI_H
 
 #include <ncurses.h>
+#include <unordered_map>
+#include <string>
+#include <deque>
+#include <vector>
+#include "player.h"
+#include "block.h"
 
 namespace ui{
-    // @brief: Init the terminal screen and perform basic settings.
-    void init();
+    static int height, width;
+    static std::unordered_map<std::string, int> color_id;
 
-    // @brief: Draw the game scene border.
-    void drawBorder();
+    // @brief: Init the terminal screen and perform basic settings.
+    // @param: The height and the width of the game window.
+    void init(int, int);
 
     // @brief: Listen for user keyboard input (no delay).
     // @return: Return the code of the input key, or -1 if no key is caught.
     int listenKeyboard();
 
+    // @brief: Draw the game scene border.
+    void drawBorder();
+
+    // @brirf: Draw the game map and the player.
+    // @param: Game map (by ref); Player (by ref).
+    void draw(const std::deque<std::vector<Block>>&, const Player&);
 }
 
 #endif //SRC_UI_H

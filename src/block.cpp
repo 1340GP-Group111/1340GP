@@ -1,10 +1,10 @@
 #include "block.h"
 
-std::string Block::get_id() {
+std::string Block::get_id() const{
     return id;
 }
 
-char Block::get_appearance() {
+char Block::get_appearance() const{
     return appearance;
 }
 
@@ -20,7 +20,7 @@ int Block::get_value() {
     return value;
 }
 
-int Block::get_status() {
+int Block::get_status() const{
     return status;
 }
 

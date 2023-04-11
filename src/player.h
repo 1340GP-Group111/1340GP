@@ -43,9 +43,11 @@ public:
     int getDamage();
     void setDamage(int damage);
 
-    int getX();
-    int getY();
+    int getX() const;
+    int getY() const;
     void setLocation(int x,int y);
+
+    int getDepth();
 
     int getScore();
     void setScore(int score);

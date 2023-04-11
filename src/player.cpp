@@ -61,9 +61,9 @@ void Player::attack(Block &block,auto direction){
 
 //player 下面九格status=0
 void Player::bomb(Map &mp){
-    for (i = x-1; i < x+2; i++){
-        for (j = y-1; j < y+2; y++){
-            (mp.mp)[i][j].setStatus=0
+    for (int i = x-1; i < x+2; i++){
+        for (int j = y-1; j < y+2; y++){
+            (mp.mp)[i][j].setStatus(0)
         }
     }
 }
@@ -85,7 +85,7 @@ char Player::getAppearance() const{
 }
 
 void Player::setAppearance(char appearance) {
-    ehis->appearance = appearance;
+    this->appearance = appearance;
 }
 
 
@@ -111,11 +111,11 @@ void Player::setDamage(int damage) {
 
 //Location
 
-int Player::getX(){
+int Player::getX() const{
     return x;
 }
 
-int Player::getY(){
+int Player::getY() const{
     return y;
 }
 

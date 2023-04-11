@@ -7,6 +7,9 @@ player.o: block.h player.h player.cpp
 gameMap.o: block.h player.h gameMap.h gameMap.cpp
 	g++ -g -c gameMap.cpp
 
+shop.o: shop.h player.h shop.cpp
+	g++ -g -c shop.cpp
+
 io.o: block.h player.h gameMap.h io.h io.cpp
 	g++ -g -c io.cpp
 
@@ -19,7 +22,7 @@ ui.o: ui.h ui.cpp
 main.o: block.h player.h gameMap.h io.h shop.h timer.h
 	g++ -g -c main.cpp
 
-main: block.o player.o gameMap.o io.o timer.o main.o ui.o
+main: block.o player.o gameMap.o io.o timer.o main.o ui.o shop.o
 	g++ -g $^ -o $@
 
 .PHONY: clean all
