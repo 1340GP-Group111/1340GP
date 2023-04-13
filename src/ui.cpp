@@ -28,7 +28,6 @@ void ui::init(int height_, int width_){
 
 int ui::listenKeyboard(){
     int key = getch();
-    if(key == ERR) return -1;
     return key;
 }
 

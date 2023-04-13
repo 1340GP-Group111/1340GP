@@ -46,33 +46,33 @@ Map::Map(){
 void Map::show_map(const Player& p){ // Print the map
 	std::cout<<std::endl;
 	int i=0; int j=0; //iterators cannot be read directly, use i,j to count  i-y, j-x
-	for(std::deque<std::vector<Block> >::iterator it = mp.begin();it!=mp.end();it++){
-		for(auto jt = (*it).begin(); jt!= (*it).end();jt++){
+	for(auto & it : mp){
+		for(auto & jt : it){
 			if (i==p.getY() && j==p.getX()){		//(*jt) is the current block
 				std::cout<<p.getAppearance();
 				j++;
 				continue;
 			}
 			
-			if ((*jt).get_id()=="white")
+			if (jt.get_id()=="white")
 				std::cout<<"\033[0m";								//set the color according to the block name
-			if ((*jt).get_id()=="green")
+			if (jt.get_id()=="green")
 				std::cout<<"\033[32m";
-			else if ((*jt).get_id()=="blue")
+			else if (jt.get_id()=="blue")
 				std::cout<<"\033[34m";
-			else if ((*jt).get_id()=="yellow")
+			else if (jt.get_id()=="yellow")
 				std::cout<<"\033[33m";
-			else if ((*jt).get_id()=="pink")
+			else if (jt.get_id()=="pink")
 				std::cout<<"\033[35m";
-			else if ((*jt).get_id()=="red")
+			else if (jt.get_id()=="red")
 				std::cout<<"\033[31m";
-			else if ((*jt).get_id()=="cyan")
+			else if (jt.get_id()=="cyan")
 				std::cout<<"\033[37m";
-			if((*jt).get_status() == 1)
-				std::cout<<(*jt).get_appearance()<"  ";
-			else if((*jt).get_status() == 2)
-				std::cout<<(*jt).get_breaking_app();
-			else if((*jt).get_status() == 0)
+			if(jt.get_status() == 1)
+				std::cout<<jt.get_appearance()<<"  ";
+			else if(jt.get_status() == 2)
+				std::cout<<jt.get_breaking_app();
+			else if(jt.get_status() == 0)
 				std::cout<<' ';
 			std::cout <<"\033[0m"; 								// reset color to default
 			j++;
@@ -87,7 +87,7 @@ void Map::show_map(const Player& p){ // Print the map
 }
 
 void Map::generateLine(const Player& p){ //according to player's depth
-	srand(time(NULL));
+	srand(time(nullptr));
 	std::vector<Block> temp_line;
 	Block normal;
 	Block special;
@@ -129,4 +129,20 @@ void Map::generateLine(const Player& p){ //according to player's depth
 	mp.push_back(temp_line);
 	mp.pop_front();
 	
+}
+
+int Map::getWidth() const{
+    return width;
+}
+
+void Map::setWidth(int width){
+    this->width = width;
+}
+
+int Map::getHeight() const{
+    return height;
+}
+
+void Map::setHeight(int height){
+    this->height = height;
 }

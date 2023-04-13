@@ -67,3 +67,7 @@ int Block::attack(int damage) { //攻击方块，输入扣血值。如果方块�
         return 1;
     }
 }
+
+void Block::setStatus(int status){
+    Block::status = status;
+}

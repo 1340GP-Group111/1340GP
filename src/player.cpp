@@ -6,11 +6,15 @@ void Player::move(int direction){
     {
         case 1 : //move left
             x--;
+            break;
         case 2 : //move down
             y++;
+            break;
         case 3 : //move right
             x++;
-
+            break;
+        default:
+            break;
     }
 }
 
@@ -33,28 +37,33 @@ void Player::move_right() {
 //movement(Judging whether to the edge)--refactoring function
 
 void Player::move_down(Map &mp) {
-    if ( y < mp.getHeight)
+    if ( y < mp.getHeight())
         move_down();
 }
 
 void Player::move_right(Map &mp) {
-    if ( x < mp.getWidth )
+    if ( x < mp.getWidth())
         move(3);
 }
 
 //player attack
 
-void Player::attack(Block &block,auto direction){
+void Player::attack(Block &block, const char &direction){
      int attackStatus = block.attack(this->damage);
      if ( attackStatus != 0 ){
          switch(direction)
          {
-             case "l" :
-                 move_left()
-             case "d" :
-                 move_down()
-             case "r" :
-                 move_right()
+             case 'l' :
+                 move_left();
+                 break;
+             case 'd' :
+                 move_down();
+                 break;
+             case 'r' :
+                 move_right();
+                 break;
+             default:
+                 break;
          }
      }
 }
@@ -141,4 +150,12 @@ void Player::playerInitialization(Map &mp){
     this->depth =0;
     this->y = 0;
     this->x = mp.getWidth/2;
+}
+
+int Player::getLevel() const{
+    return level;
+}
+
+void Player::setLevel(int level){
+    Player::level = level;
 }

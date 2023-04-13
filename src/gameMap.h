@@ -16,6 +16,14 @@ public:
     void show_map(const Player&);
 private:
     int width, height;
+public:
+    int getWidth() const;
+
+    void setWidth(int width);
+
+    int getHeight() const;
+
+    void setHeight(int height);
 };
 
 #endif

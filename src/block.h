@@ -10,6 +10,10 @@ private:
     char breaking_app;
     int health;
     int value;
+public:
+    void setStatus(int status);
+
+private:
     int status;
 
 public:   

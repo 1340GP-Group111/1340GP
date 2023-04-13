@@ -26,7 +26,7 @@ public:
 
     //player attack
 
-    void attack(Block &block,auto direction);
+    void attack(Block &block, const char &direction);
     void bomb(Map &mp);
 
     //getters and setters
@@ -58,6 +58,12 @@ public:
 private:
     char appearance;
     int level;
+public:
+    int getLevel() const;
+
+    void setLevel(int level);
+
+private:
     int bombNum;
     int wealth;
     int damage;
