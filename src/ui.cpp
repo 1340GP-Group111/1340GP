@@ -10,7 +10,7 @@ void ui::init(int height_, int width_){
     cbreak();           // Turn off input buffer. Read every input character immediately.
     noecho();           // Turn off input echo.
     curs_set(0);        // Hide the cursor.
-    nodelay(stdscr, true);     // Set getch() to nodelay mode. Avoid blocking the main loop;
+    timeout(200);       // Set timeout for getch() to 200ms.
     clear();
 
     // Color settings
