@@ -119,7 +119,7 @@ void Map::generateLine(const Player& p){ //according to player's depth
 		normal.copy(b_6); 
 		special.copy(s_6);
 	}
-	for (int j=1;j<=width;j++){				//randomly generate normal and special blocks
+	for (int j=1;j<=WIDTH;j++){				//randomly generate normal and special blocks
 		int num = rand()%10+1;
 		if (num%5 == 0) 
 			temp_line.push_back(special);
@@ -131,18 +131,11 @@ void Map::generateLine(const Player& p){ //according to player's depth
 	
 }
 
-int Map::getWidth() const{
-    return width;
-}
-
-void Map::setWidth(int width){
-    this->width = width;
-}
-
-int Map::getHeight() const{
-    return height;
-}
-
-void Map::setHeight(int height){
-    this->height = height;
-}
+//int Map::getWidth() const{
+//    return Map::WIDTH;
+//}
+//
+//
+//int Map::getHeight() const{
+//    return Map::HEIGHT;
+//}

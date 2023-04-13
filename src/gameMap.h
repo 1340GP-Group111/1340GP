@@ -9,21 +9,15 @@
 
 class Map{
 public:
+    static const int WIDTH = 20, HEIGHT = 20;
     std::deque<std::vector<Block>> mp;
+
     Map();
+
     Map(int, int);
-    void generateLine(const Player&);
-    void show_map(const Player&);
-private:
-    int width, height;
-public:
-    int getWidth() const;
 
-    void setWidth(int width);
+    void generateLine(const Player &);
 
-    int getHeight() const;
-
-    void setHeight(int height);
+    void show_map(const Player &);
 };
-
 #endif

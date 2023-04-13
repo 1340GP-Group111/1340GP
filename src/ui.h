@@ -25,6 +25,10 @@ namespace ui{
     // @return: Return the code of the input key, or -1 if no key is caught.
     int listenKeyboard();
 
+    // @brief: Print a string on the screen.
+    // @param: The position of the string; The string; The color of the string.
+    void printStr(int y, int x, const std::string&, const std::string&);
+
     // @brief: Draw the game scene border.
     void drawBorder();
 

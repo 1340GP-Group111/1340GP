@@ -17,7 +17,7 @@ public:
 
     // @brief: Check if the time limit is reached.
     // @return: Return 1 if timeout, 0 otherwise.
-    bool timeout();
+    bool chk_timeout();
 private:
     static bool timeout_flag;
 

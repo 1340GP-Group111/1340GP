@@ -8,7 +8,7 @@ Timer::Timer(){
     timeout_flag = false;
 }
 
-bool Timer::timeout(){
+bool Timer::chk_timeout(){
     return timeout_flag;
 }
 

@@ -37,12 +37,12 @@ void Player::move_right() {
 //movement(Judging whether to the edge)--refactoring function
 
 void Player::move_down(Map &mp) {
-    if ( y < mp.getHeight())
+    if ( y < Map::HEIGHT)
         move_down();
 }
 
 void Player::move_right(Map &mp) {
-    if ( x < mp.getWidth())
+    if ( x < Map::WIDTH)
         move(3);
 }
 
@@ -72,7 +72,7 @@ void Player::attack(Block &block, const char &direction){
 void Player::bomb(Map &mp){
     for (int i = x-1; i < x+2; i++){
         for (int j = y-1; j < y+2; y++){
-            (mp.mp)[i][j].setStatus(0)
+            (mp.mp)[i][j].setStatus(0);
         }
     }
 }
@@ -111,7 +111,7 @@ void Player::setBombNum(int bombNum) {
 //damage
 
 int Player::getDamage() const{
-    return Damage;
+    return damage;
 }
 
 void Player::setDamage(int damage) {
@@ -149,7 +149,7 @@ void Player::playerInitialization(Map &mp){
     this->score = 0;
     this->depth =0;
     this->y = 0;
-    this->x = mp.getWidth/2;
+    this->x = Map::WIDTH/2;
 }
 
 int Player::getLevel() const{

@@ -31,6 +31,14 @@ int ui::listenKeyboard(){
     return key;
 }
 
+void ui::printStr(int y, int x, const std::string& str, const std::string& color){
+    int num = ui::color_id[color];
+    attron(COLOR_PAIR(num));
+    mvaddstr(y, x, str.c_str());
+    attroff(COLOR_PAIR(num));
+    refresh();
+}
+
 void ui::drawBorder(){
     attron(COLOR_PAIR(1));                      // Set border color
     for(int i = 0; i <= height+1; i++){         // left and right border.
