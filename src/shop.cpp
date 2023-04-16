@@ -31,64 +31,103 @@ void Shop::buyAppearance(Player &player){
             std::cout << i+1 << ". " << availableSkins[i] << " (" << APPEARANCE_PRICE << " coins)" << std::endl;
         }
     }
-    std::cin >> option;
+
     // return to main, showShop again
-    if(option == 0){ 
-        return;
-    }
-    // valid selection
-    if(option > availableSkins.size()){ 
-        std::cout << "Invalid option." << std::endl;
-        return;
-    }
-    char selectedSkin = availableSkins[option-1];
-    // if own, player can't buy the appearance
-    if(std::find(ownedSkins.begin(), ownedSkins.end(), selectedSkin) != ownedSkins.end()){ 
-        std::cout << "You already own this appearance." << std::endl;
-        return;
-    }
-    // if coin is enough
-    if(player.getWealth() >= APPEARANCE_PRICE){
-        // should add setElement() in player
-        player.setWealth(player.getWealth() - APPEARANCE_PRICE); 
-        ownedSkins.push_back(selectedSkin);
-        std::cout << "You bought an appearance. You now have " << player.getWealth() << " coins." << std::endl;
-        // ask if player wants to equip the skin just bought
-        std::cout << "Do you wish to equip the skin you just bought? (0 for YES, 1 for NO)" << std::endl;
-        std::cin >> choice;
-        if(choice==0){
-            player.setAppearance(selectedSkin);
-            return;
+    while (true){
+        std::cout << "Please input corresponding numeral (enter 0 to exit):" << std::endl;
+        while(true){
+            std::cin >> option;
+            if(std::cin.fail()){
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                std::cout << "Invalid input: Input must be an integer." << std::endl;
+            } else {
+                std::cin.ignore(10000, '\n');
+                break;
+            }
         }
-    }else{
-        std::cout << "You don't have enough coins." << std::endl;
-        return;
+
+        if(option == 0){
+            break;
+        }
+
+        if(option > availableSkins.size()){
+            std::cout << "Invalid option: Input exceeds appearance number." << std::endl;
+            continue;
+        }
+
+        char selectedSkin = availableSkins[option-1];
+        // if own, player can't buy the appearance
+        if(std::find(ownedSkins.begin(), ownedSkins.end(), selectedSkin) != ownedSkins.end()){
+            std::cout << "You already own this appearance." << std::endl;
+            continue;
+        }
+        // if coin is enough
+        if(player.getWealth() >= APPEARANCE_PRICE){
+            // should add setElement() in player
+            player.setWealth(player.getWealth() - APPEARANCE_PRICE);
+            ownedSkins.push_back(selectedSkin);
+            std::cout << "You bought an appearance. You now have " << player.getWealth() << " coins." << std::endl;
+            // ask if player wants to equip the skin just bought
+            std::cout << "Do you wish to equip the skin you just bought? (0 for YES, 1 for NO)" << std::endl;
+            std::cin >> choice;
+            if(choice==0){
+                player.setAppearance(selectedSkin);
+            }
+        }else{
+            std::cout << "You don't have enough coins." << std::endl;
+        }
     }
+
 }
 
 void Shop::equipAppearance(Player& player) {
     int option;
     std::cout << "Choose an appearance to equip (enter 0 to exit):" << std::endl;
     // list available owned skins
-    for (int i = 0; i < ownedSkins.size(); i++) { 
+    for (int i = 0; i < ownedSkins.size(); i++) {
         std::cout << i + 1 << ". " << ownedSkins[i] << std::endl;
     }
-    std::cin >> option;
-    if (option == 0) {
-        return;
+
+    while (true){
+        std::cout << "Please input corresponding numeral (enter 0 to exit):" << std::endl;
+        while(true){
+            std::cin >> option;
+            if(std::cin.fail()){
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                std::cout << "Invalid input: Input must be an integer." << std::endl;
+            } else {
+                std::cin.ignore(10000, '\n');
+                break;
+            }
+        }
+
+        if(option == 0){
+            break;
+        }
+
+        if(option > ownedSkins.size()){
+            std::cout << "Invalid option: Input exceeds appearance number." << std::endl;
+            continue;
+        }
+
+        if (option > ownedSkins.size()) {
+            std::cout << "Invalid option." << std::endl;
+            continue;
+        }
+        char selectedSkin = ownedSkins[option - 1];
+        // see if the skins is already equipped
+        if (selectedSkin == player.getAppearance()) {
+            std::cout << "You already have this appearance equipped." << std::endl;
+            continue;
+        }
+        player.setAppearance(selectedSkin);
+        std::cout << "You equipped a new appearance." << std::endl;
     }
-    if (option > ownedSkins.size()) {
-        std::cout << "Invalid option." << std::endl;
-        return;
-    }
-    char selectedSkin = ownedSkins[option - 1];
-    // see if the skins is already equipped
-    if (selectedSkin == player.getAppearance()) {
-        std::cout << "You already have this appearance equipped." << std::endl;
-        return;
-    }
-    player.setAppearance(selectedSkin);
-    std::cout << "You equipped a new appearance." << std::endl;
+}
+
+
 }
 
 void Shop::buyBomb(Player &player){
