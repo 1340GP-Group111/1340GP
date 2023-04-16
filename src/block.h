@@ -8,6 +8,7 @@ private:
     std::string id;
     char appearance;
     char breaking_app;
+    int max_health;
     int health;
     int value;
 public:
@@ -21,6 +22,7 @@ public:
     char get_appearance() const;
     char get_breaking_app();
     int get_health();
+    int get_max_health();
     int get_value();
     int get_status() const;
     
@@ -30,8 +32,8 @@ public:
     int attack(int damage);           //攻击方块。输入扣血量，如果方块已经是空的返回1, 攻击破坏成功返回2,未破坏返回0 
 };
 
-//health:线性增长
-//value:指数增长 
+//health: Linear growth
+//value:  Exponential growth 
 //empty blocks:
 Block b_00("white",'#','*',0,0,0); 
 //normal blocks:
@@ -50,6 +52,5 @@ Block s_3("yellow",'$','$',1,80,1);
 Block s_4("red",'$','$',1,160,1);
 Block s_5("pink",'$','$',1,320,1);
 Block s_6("cyan",'$','$',1,640,1);
- 
-Block ob_0("black",'#','*',999,1,1); //obstacles that cannot be broken
-#endif
+//obstacles that cannot be broken:
+Block ob_0("black",'#','*',999,1,1); 
