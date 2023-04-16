@@ -27,7 +27,7 @@ Map::Map(){
 	height = 12;
 	for (int i=1;i<=height/2;i++){
 		std::vector<Block> temp_line;
-		Block temp_block = b_0;
+		Block temp_block = b_00;
 		for (int j=1;j<=width;j++){
 			temp_line.push_back(temp_block);
 		}
