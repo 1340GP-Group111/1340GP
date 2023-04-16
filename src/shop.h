@@ -21,6 +21,26 @@ class Shop {
         void buyAttack(Player &player);
         void buyTime(Player &player, int &time);
         static void exitShop();
+    
+        int x; // For player to move
+    	int y;	
+    	void set_xy(int x_,int y_);
+    	void move_up(deque<vector<string> >& mp,Player& real_p);
+    	void move_down(deque<vector<string> >& mp,Player& real_p);
+    	void move_left(deque<vector<string> >& mp,Player& real_p);
+    	void move_right(deque<vector<string> >& mp,Player& real_p);
+    	void interact(string tar,Player& real_p);
 };
 
+class ShoppingMap{
+    public:
+        ShoppingMap(int width_,int height_);
+        void show_map(Shop& p, Player &real_p);
+
+        int width;
+        int height;
+        std::deque<std::vector<std::string> > mp;
+};
+
+int shop(Player & real_p);
 #endif
