@@ -262,9 +262,10 @@ void ShoppingMap::show_map(Shop& p, Player &real_p){
             j++;
         }
         if(i==3) cout<<"  Here is the base. You can shop for items or upgrade here.";
-        if(i==4) cout<<"  Wealth:"<<real_p.getWealth()<<" Level:"<<real_p.getLevel();
-        if(i==5) cout<<"  Type 'r' to start digging";
-        if(i==6) cout<<"  Type 'quit' to quit the game";
+        if(i==4) cout<<"  Wealth:"<<real_p.getWealth()<<"  Level:"<<real_p.getLevel();
+        if(i==5) cout<<"  Bombs:"<<real_p.getBombNum()<<"  Oxygen pack:"<<real_p.getOxygen();
+        if(i==6) cout<<"  Type 'r' to start digging";
+        if(i==7) cout<<"  Type 'quit' or 'q' to quit the game";
         j=0;				
         cout<<endl;
         i++;
