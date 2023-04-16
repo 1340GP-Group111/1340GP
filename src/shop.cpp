@@ -128,3 +128,138 @@ void Shop::buyTime(Player &player, int &time){
 void Shop::exitShop(){
     std::cout << "Thank you for visiting the shop!" << std::endl;
 }
+
+
+void Shop::set_xy(int x_,int y_){
+	x=x_;
+	y=y_;
+}
+void Shop::move_up(deque<vector<string> > &mp,Player& real_p){
+	if (mp[y-1][x]==" "){
+		y--;
+	}
+	else if(mp[y-1][x] != "#"){
+		interact(mp[y-1][x],real_p);
+	}
+}
+void Shop::move_down(deque<vector<string> > &mp,Player& real_p){
+	if (mp[y+1][x]==" "){
+		y++;
+	}
+	else if(mp[y+1][x] != "#"){
+		interact(mp[y+1][x],real_p);
+	}
+}
+void Shop::move_left(deque<vector<string> > &mp,Player& real_p){
+	if (mp[y][x-1]==" "){
+		x--;
+	}
+	else if(mp[y][x-1] != "#"){
+		interact(mp[y][x-1],real_p);
+	}
+}
+void Shop::move_right(deque<vector<string> > &mp,Player& real_p){
+	if (mp[y][x+1]==" "){
+		x++;
+	}
+	else if(mp[y][x+1] != "#"){
+		interact(mp[y][x+1],real_p);
+	}
+}
+void Shop::interact(string tar,Player& real_p){
+	if(tar=="L"){
+		buyAttack(real_p);
+	}
+	else if(tar=="M"){
+		buyBomb(real_p);
+	}
+	else if(tar=="A"){
+		buyAppearance(real_p);
+	}
+	else if(tar=="O"){
+		buyTime(real_p,5);
+	}
+	
+}
+
+ShoppingMap::ShoppingMap(int width_,int height_){
+    width=width_;
+    height=height_;
+    for(int i=0;i<=height;i++){
+        vector<string> temp_line;
+        for(int j=0;j<=width;j++){
+            string temp=" ";
+            temp_line.push_back(temp);
+        }
+        mp.push_back(temp_line);
+    }
+
+    for(deque<vector<string> >::iterator it=mp.begin();it!=mp.end();it++){
+        (*it)[0] = "#";
+        (*it)[width]="#";					
+    }
+    for(vector<string>::iterator it = (mp[0]).begin();it!=(mp[0]).end();it++){
+        (*it) = "#";
+    }
+    for(vector<string>::iterator it = mp[height].begin();it!=mp[height].end();it++){
+        (*it) = "#";
+    }
+
+    mp[height/3][2] = "M";
+    mp[height-height/3][2] = "L";
+    mp[height/3][width-2] = "A";
+    mp[height - height/3][width-2] = "O";
+    }
+		
+void ShoppingMap::show_map(Shop& p, Player &real_p){
+    cout<<"\n\n\n\n\n"<<endl;
+    int i=0;
+    int j=0;
+    for(deque<vector<string> >::iterator it=mp.begin();it!=mp.end();it++){
+        for(vector<string>::iterator jt = (*it).begin();jt!=(*it).end();jt++){
+            if(p.y==i && p.x==j)
+                cout<<"P";
+            else cout<<(*jt);
+            j++;
+        }
+        if(i==3) cout<<"  Here is the base. You can shop for items or upgrade here.";
+        if(i==4) cout<<"  Wealth:"<<real_p.getWealth()<<" Level:"<<real_p.getLevel();
+        if(i==5) cout<<"  Type 'r' to start digging";
+        if(i==6) cout<<"  Type 'quit' to quit the game";
+        j=0;				
+        cout<<endl;
+        i++;
+    }
+}
+
+int shop(Player & real_p){     //Main Shopping Loop
+	Shop p;
+	p.set_xy(10,5);
+	ShoppingMap map(20,10);
+	map.show_map(p,real_p);
+	while(true){
+		string Input;
+		cin>>Input;
+		if(Input=="quit" || Input=="Quit")
+			return 2;
+		char Input_char=tolower(Input[0]);
+		if(Input_char=='w'){
+			p.move_up(map.mp,real_p);
+		}
+		else if(Input_char=='s'){
+			p.move_down(map.mp,real_p);
+		}
+		else if(Input_char=='a'){
+			p.move_left(map.mp,real_p);
+		}
+		else if(Input_char=='d'){
+			p.move_right(map.mp,real_p);
+		}
+		else if(Input_char=='r'){
+			return 0;
+		}
+		
+		map.show_map(p,real_p);
+		
+	}
+}
