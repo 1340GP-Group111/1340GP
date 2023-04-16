@@ -32,8 +32,9 @@ public:
 
 //health:线性增长
 //value:指数增长 
-//一些gameMap需要用到的全局Block
-//normal blocks 
+//empty blocks:
+Block b_00("white",'#','*',0,0,0); 
+//normal blocks:
 Block b_0("white",'#','*',2,1,1);
 Block b_1("green",'#','*',3,2,1);
 Block b_2("blue",'#','*',4,4,1);
