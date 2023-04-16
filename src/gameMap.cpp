@@ -81,7 +81,7 @@ void Map::show_map(const Player& p){ 				// Print the map
 		}
 		j=0;	// End of each line
 		if(i==4) cout<<"\t current depth:"<<p.getDepth();
-		else if(i==5) cout<<"\t score:"<<p.getScore()<<" level:"<<p.getLevel();
+		else if(i==5) cout<<"\t wealth:"<<p.getWealth()<<" level:"<<p.getLevel();
 		else if(i==6) cout<<"\t Use a,s,d to move";
 		else if(i==7) cout<<"\t Press 'r' to go back to the base";
 
