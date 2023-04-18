@@ -3,31 +3,31 @@
 
 #include "block.h"
 #include "gameMap.h"
+#include <map>
 
 class Player{
 public:
-    //Constructor
-    Player(char appearance_,int level_,int bombNum_,int wealth_,int damage_, int score_, int depth_, int x_, int y_):
-             appearance(appearance_), level(level_), bombNum(bombNum_), wealth(wealth_),damage(damage_),score(score_),depth(depth_),x(x_),y(y_) {}
+    //Constructor  skin--std::move(std::map <char,int>)
+    Player(char appearance_,int level_,int bombNum_,int wealth_,int damage_, int oxygen_, int depth_, int x_, int y_,std::map <char,int> &&skin_):
+            appearance(appearance_), level(level_), bombNum(bombNum_), wealth(wealth_),damage(damage_),oxygen(oxygen_),depth(depth_),x(x_),y(y_),skin(skin_) {}
 
-    Player(): Player('@',1,1,0,1,0,0,0,0) {}
-    Player(char appearance_, int level_, int bombNum_, int wealth_,int damage_): Player(appearance_,level_,bombNum_,wealth_,damage_,0,0,0,0) {}
+    Player(): Player('@',1,1,0,1,10,0,0,0,skinInt()) {}
+    Player(char appearance_, int level_, int bombNum_, int wealth_,int damage_): Player(appearance_,level_,bombNum_,wealth_,damage_,10,0,0,0,skinInt()) {}
 
     //Destructor
-    ~Player() {}
+    ~Player()=default;
 
     //movement
 
-    void move_left();
-    void move_right();
-    void move_down();
+//    void move_left();
+//    void move_right();
+//    void move_down();
+    void move_left(Map &mp);   //Judging whether to the edge
     void move_right(Map &mp);  //Judging whether to the edge
     void move_down(Map &mp);   //Judging whether to the edge
 
-    //player attack
-
-    void attack(Block &block, const char &direction);
-    void bomb(Map &mp);
+    //player bomb
+    void bomb(Map &mp) const;
 
     //getters and setters
 
@@ -49,31 +49,44 @@ public:
 
     int getDepth() const;
 
-    int getScore() const;
-    void setScore(int score);
+    int getOxygen() const;
+    void setOxygen(int oxygen);
+
+    int getLevel() const;
+    void setLevel(int level);
+
+    std::map <char,int> getSkin() const;
+    void setSkin(std::map <char,int> &&skin);
 
     //Reset score, depth, x, y when starting a new game
     void playerInitialization(Map &mp);
 
 private:
     char appearance;
+    std::map <char,int> skin;
     int level;
-public:
-    int getLevel() const;
-
-    void setLevel(int level);
-
-private:
     int bombNum;
     int wealth;
     int damage;
-    int score;       //current game score
+    int oxygen;      //time
     int depth;       //absolute depth
     int x, y;        //location on the map
 
     void move(int);
 
+    //skin initialization
+    static std::map<char, int> skinInt() {
+
+        std::map<char, int> TempMColor;
+        TempMColor.insert(std::pair<char, int>('@',1));
+        TempMColor.insert(std::pair<char, int>('#',0));
+        TempMColor.insert(std::pair<char, int>('$',0));
+        TempMColor.insert(std::pair<char, int>('%',0));
+        TempMColor.insert(std::pair<char, int>('^',0));
+        return TempMColor;
+
+    }
+
 };
 
 #endif
-
