@@ -5,19 +5,21 @@
 #include <deque>
 #include <random>
 #include <ctime>
+#include <iostream>
 #include "player.h"
-
+class Player;
 class Map{
 public:
-    static const int WIDTH = 20, HEIGHT = 20;
-    std::deque<std::vector<Block>> mp;
+    int width;
+	int height;
+    std::deque<std::vector<Block> > mp;
 
     Map();
 
     Map(int, int);
 
-    void generateLine(const Player &);
+    void generateLine(const Player& p);
 
-    void show_map(const Player &);
+    void show_map(const Player& p);
 };
 #endif
