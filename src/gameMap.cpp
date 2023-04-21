@@ -1,5 +1,5 @@
 #include "gameMap.h"
-#include <iostream>
+#include "player.h"
 
 Map::Map(int height_, int width_){
 	width = width_;
@@ -44,56 +44,56 @@ Map::Map(){
 }
 
 void Map::show_map(const Player& p){ 				// Print the map
-	cout<<"\n\n\n\n\n"<<endl;
+	std::cout<<"\n\n\n\n\n"<<std::endl;
 	int i=0; int j=0; //iterators cannot be read directly, use i,j to count
-	for(deque<vector<Block> >::iterator it = mp.begin();it!=mp.end();it++){  
-		for(vector<Block>::iterator jt = (*it).begin(); jt!= (*it).end();jt++){
+	for(std::deque<std::vector<Block> >::iterator it = mp.begin();it!=mp.end();it++){  
+		for(std::vector<Block>::iterator jt = (*it).begin(); jt!= (*it).end();jt++){
 			if (i==p.getY() && j==p.getX()){		//(*jt) is the current block
-				cout<<p.getAppearance();
+				std::cout<<p.getAppearance();
 				j++;
 				continue;
 			}
 			
 			if ((*jt).get_id()=="white")
-				cout<<"\033[0m";								//set the color according to the block name
+				std::cout<<"\033[0m";								//set the color according to the block name
 			if ((*jt).get_id()=="green")
-				cout<<"\033[32m";
+				std::cout<<"\033[32m";
 			else if ((*jt).get_id()=="blue")
-				cout<<"\033[34m";
+				std::cout<<"\033[34m";
 			else if ((*jt).get_id()=="yellow")
-				cout<<"\033[33m";
+				std::cout<<"\033[33m";
 			else if ((*jt).get_id()=="pink")
-				cout<<"\033[35m";
+				std::cout<<"\033[35m";
 			else if ((*jt).get_id()=="red")
-				cout<<"\033[31m";
+				std::cout<<"\033[31m";
 			else if ((*jt).get_id()=="cyan")
-				cout<<"\033[37m";
+				std::cout<<"\033[37m";
 			else if((*jt).get_id()=="black")
-				cout<<"\033[90m";
+				std::cout<<"\033[90m";
 			if((*jt).get_status() == 1)
-				cout<<(*jt).get_appearance()<"  "; 	
+				std::cout<<(*jt).get_appearance()<"  "; 	
 			else if((*jt).get_status() == 2)
-				cout<<(*jt).get_breaking_app();
+				std::cout<<(*jt).get_breaking_app();
 			else if((*jt).get_status() == 0)			
-				cout<<' ';
-			cout <<"\033[0m"; 								// reset color to default
+				std::cout<<' ';
+			std::cout <<"\033[0m"; 								// reset color to default
 			j++;
 		}
 		j=0;	// End of each line
-		if(i==3) cout<<"\t current depth:"<<p.getDepth();
-		else if(i==4) cout<<"\t wealth:"<<p.getWealth()<<"  level:"<<p.getLevel();
-		else if(i==5) cout<<"\t Bombs:"<<p.getBombNum()<<"  Oxygen pack:"<<p.getOxygen();
-		else if(i==6) cout<<"\t Use a,s,d to move";
-		else if(i==7) cout<<"\t Press 'r' to go back to the base";
+		if(i==3) std::cout<<"\t current depth:"<<p.getDepth();
+		else if(i==4) std::cout<<"\t wealth:"<<p.getWealth()<<"  level:"<<p.getLevel();
+		else if(i==5) std::cout<<"\t Bombs:"<<p.getBombNum()<<"  Oxygen pack:"<<p.getTime()<<"\\"<<p.getOxygen();
+		else if(i==6) std::cout<<"\t Use a,s,d to move";
+		else if(i==7) std::cout<<"\t Press 'r' to go back to the base";
 
 		i++;
-		cout<<endl;
+		std::cout<<std::endl;
 	}
 }
 
 void Map::generateLine(const Player& p){ //according to player's depth
 		srand(time(NULL));
-	vector<Block> temp_line;
+	std::vector<Block> temp_line;
 	Block normal;
 	Block special;
 	normal.copy(b_0);
