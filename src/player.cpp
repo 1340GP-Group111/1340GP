@@ -10,6 +10,7 @@ void Player::move(int direction){
         case 2 : //move down
             //The absolute depth of the player
             this->depth++;
+            
             break;
         case 3 : //move right
             x++;
@@ -39,42 +40,59 @@ void Player::move(int direction){
 
 void Player::move_left(Map &mp) {
     //Determine whether the square on the left is broken
-    int attackStatus = mp.mp[this->y][this->x-1].attack(this->damage);
-    //The block was compromised or was originally an empty block
-    if ( attackStatus != 0 ){
-        //whether to reach the border
-        if (x != 0)
-            move(1);//move left
-    }
+    if(x>0) {
+			Block &target =mp.mp[this->y][this->x-1];//check obstacles
+			if(target.get_status()==0)
+				x=x-1;							//if empty, move left
+			else if(attack(target) == true)
+				x=x-1;							//if attack is successful, move left
+		}
 
 }
 
 void Player::move_down(Map &mp) {
     //Determine whether the block below is broken
-    int attackStatus = mp.mp[this->y+1][this->x].attack(this->damage);
-    //The block was compromised or was originally an empty block
-    if ( attackStatus != 0 ){
-        move(2);//move down
-    }
+    Block &target = mp.mp[this->y+1][this->x];
+			if(target.get_status()==0){
+				mp.generateLine(*this); 
+				depth++;
+			}
+			else if(attack(target) == true){
+				mp.generateLine(*this);
+				depth++;
+			}
 }
 
 void Player::move_right(Map &mp) {
     //Determine whether the square on the right is broken
-    int attackStatus = mp.mp[this->y][this->x-1].attack(this->damage);
-    //The block was compromised or was originally an empty block
-    if ( attackStatus != 0 ){
-        //whether to reach the border
-        if ( x < Map::WIDTH)
-            move(3);//move right
-    }
+    if(x<20){ //width
+			Block &target = mp.mp[this->y][this->x+1];//check obstacles
+			if(target.get_status()==0)
+				x=x+1;
+			else if(attack(target) == true)
+				x=x+1;
+		}
 }
+
+bool Player::attack(Block& target){ //Deal with the target block
+
+	int result = target.attack(1);
+	if (result==2){
+		wealth = wealth + target.get_value();
+		return true;
+	}
+	else if(result==1){
+		return true;
+	}
+	else return false;
+	}
 
 //player 下面九格status=0
 void Player::bomb(Map &mp) const{
-    for (int i = y-1; i < y+2; i++){
+    for (int i = y; i < y+3; i++){
         for (int j = x-1; j < x+2; j++){
             //whether to reach the border
-            if (j>=0 && j<=Map::WIDTH)
+            if (j>=0 && j<=mp.width)
                (mp.mp)[i][j].setStatus(0);
         }
     }
@@ -140,8 +158,9 @@ void Player::setLocation(int x,int y){
 
 void Player::playerInitialization(Map &mp){
     this->depth =0;
-    this->y = Map::HEIGHT/2;
-    this->x = Map::WIDTH/2;
+    this->y = mp.height/2;
+    this->x = mp.width/2;
+    this->time = this->getOxygen();
 }
 
 //level
@@ -154,12 +173,18 @@ void Player::setLevel(int level){
      this->level = level;
 }
 
-//oxygen
 
+//time
+int Player::getTime() const{
+	return time;
+}
+void Player::setTime(int t){
+	this->time = t;
+}
+//oxygen
 int Player::getOxygen() const{
     return oxygen;
 }
-
 void Player::setOxygen(int oxygen){
     this->oxygen = oxygen;
 }
@@ -169,7 +194,9 @@ void Player::setOxygen(int oxygen){
 int Player::getDepth() const{
     return depth;
 }
-
+void Player::setDepth(int d){
+	this->depth = d;
+}
 //skin
 
 std::map <char,int> Player::getSkin() const{
@@ -177,6 +204,6 @@ std::map <char,int> Player::getSkin() const{
 }
 
 //setSkin(std::move(std::map <char,int>))
-void Player::setSkin(std::map <char,int> &&skin){
+void Player::setSkin(std::map <char,int> skin){
     this->skin=skin;
 }
