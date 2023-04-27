@@ -1,7 +1,7 @@
 #include "shop.h"
 #include <iostream>
 #include <algorithm>
-
+#include <conio.h> // to be deleted
 Shop::Shop(){
     availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now. We can have "☺","☹","♚","☃","☠"
     ownedSkins = {'@'}; // owned skins
@@ -128,7 +128,7 @@ void Shop::equipAppearance(Player& player) {
 }
 
 
-}
+
 
 void Shop::buyBomb(Player &player){
     if(player.getWealth() >= BOMB_PRICE){
@@ -152,12 +152,12 @@ void Shop::buyAttack(Player &player){
     }
 }
 
-void Shop::buyTime(Player &player, int &time){
+void Shop::buyTime(Player &player, int time){
     if(player.getWealth() >= TIME_PRICE){
         player.setWealth(player.getWealth() - TIME_PRICE);
         // amount of time added per purchase, undetermined
-        time += 0;
-        std::cout << "You bought 0 minutes of time. You now have " << time << " minutes now." << std::endl;
+        player.setOxygen( player.getOxygen() + time );
+        std::cout << "You bought 0 minutes of time. You now have " << player.getOxygen() << " minutes now." << std::endl;
         TIME_PRICE*=10;
     }else{
         std::cout << "You don't have enough gold coins." << std::endl;
@@ -173,7 +173,7 @@ void Shop::set_xy(int x_,int y_){
 	x=x_;
 	y=y_;
 }
-void Shop::move_up(deque<vector<string> > &mp,Player& real_p){
+void Shop::move_up(std::deque<std::vector<std::string> > &mp,Player& real_p){
 	if (mp[y-1][x]==" "){
 		y--;
 	}
@@ -181,7 +181,7 @@ void Shop::move_up(deque<vector<string> > &mp,Player& real_p){
 		interact(mp[y-1][x],real_p);
 	}
 }
-void Shop::move_down(deque<vector<string> > &mp,Player& real_p){
+void Shop::move_down(std::deque<std::vector<std::string> > &mp,Player& real_p){
 	if (mp[y+1][x]==" "){
 		y++;
 	}
@@ -189,7 +189,7 @@ void Shop::move_down(deque<vector<string> > &mp,Player& real_p){
 		interact(mp[y+1][x],real_p);
 	}
 }
-void Shop::move_left(deque<vector<string> > &mp,Player& real_p){
+void Shop::move_left(std::deque<std::vector<std::string> > &mp,Player& real_p){
 	if (mp[y][x-1]==" "){
 		x--;
 	}
@@ -197,7 +197,7 @@ void Shop::move_left(deque<vector<string> > &mp,Player& real_p){
 		interact(mp[y][x-1],real_p);
 	}
 }
-void Shop::move_right(deque<vector<string> > &mp,Player& real_p){
+void Shop::move_right(std::deque<std::vector<std::string> > &mp,Player& real_p){
 	if (mp[y][x+1]==" "){
 		x++;
 	}
@@ -205,7 +205,7 @@ void Shop::move_right(deque<vector<string> > &mp,Player& real_p){
 		interact(mp[y][x+1],real_p);
 	}
 }
-void Shop::interact(string tar,Player& real_p){
+void Shop::interact(std::string tar,Player& real_p){
 	if(tar=="L"){
 		buyAttack(real_p);
 	}
@@ -225,22 +225,22 @@ ShoppingMap::ShoppingMap(int width_,int height_){
     width=width_;
     height=height_;
     for(int i=0;i<=height;i++){
-        vector<string> temp_line;
+        std::vector<std::string> temp_line;
         for(int j=0;j<=width;j++){
-            string temp=" ";
+            std::string temp=" ";
             temp_line.push_back(temp);
         }
         mp.push_back(temp_line);
     }
 
-    for(deque<vector<string> >::iterator it=mp.begin();it!=mp.end();it++){
+    for(std::deque<std::vector<std::string> >::iterator it=mp.begin();it!=mp.end();it++){
         (*it)[0] = "#";
         (*it)[width]="#";					
     }
-    for(vector<string>::iterator it = (mp[0]).begin();it!=(mp[0]).end();it++){
+    for(std::vector<std::string>::iterator it = (mp[0]).begin();it!=(mp[0]).end();it++){
         (*it) = "#";
     }
-    for(vector<string>::iterator it = mp[height].begin();it!=mp[height].end();it++){
+    for(std::vector<std::string>::iterator it = mp[height].begin();it!=mp[height].end();it++){
         (*it) = "#";
     }
 
@@ -251,23 +251,23 @@ ShoppingMap::ShoppingMap(int width_,int height_){
     }
 		
 void ShoppingMap::show_map(Shop& p, Player &real_p){
-    cout<<"\n\n\n\n\n"<<endl;
+    std::cout<<"\n\n\n\n\n"<<std::endl;
     int i=0;
     int j=0;
-    for(deque<vector<string> >::iterator it=mp.begin();it!=mp.end();it++){
-        for(vector<string>::iterator jt = (*it).begin();jt!=(*it).end();jt++){
+    for(std::deque<std::vector<std::string> >::iterator it=mp.begin();it!=mp.end();it++){
+        for(std::vector<std::string>::iterator jt = (*it).begin();jt!=(*it).end();jt++){
             if(p.y==i && p.x==j)
-                cout<<"P";
-            else cout<<(*jt);
+                std::cout<<"P";
+            else std::cout<<(*jt);
             j++;
         }
-        if(i==3) cout<<"  Here is the base. You can shop for items or upgrade here.";
-        if(i==4) cout<<"  Wealth:"<<real_p.getWealth()<<"  Level:"<<real_p.getLevel();
-        if(i==5) cout<<"  Bombs:"<<real_p.getBombNum()<<"  Oxygen pack:"<<real_p.getOxygen();
-        if(i==6) cout<<"  Type 'r' to start digging";
-        if(i==7) cout<<"  Type 'quit' or 'q' to quit the game";
+        if(i==3) std::cout<<"  Here is the base. You can shop for items or upgrade here.";
+        if(i==4) std::cout<<"  Wealth:"<<real_p.getWealth()<<"  Level:"<<real_p.getLevel();
+        if(i==5) std::cout<<"  Bombs:"<<real_p.getBombNum()<<"  Oxygen pack:"<<real_p.getOxygen();
+        if(i==6) std::cout<<"  Type 'r' to start digging";
+        if(i==7) std::cout<<"  Type 'quit' or 'q' to quit the game";
         j=0;				
-        cout<<endl;
+        std::cout<<std::endl;
         i++;
     }
 }
@@ -278,11 +278,15 @@ int shop(Player & real_p){     //Main Shopping Loop
 	ShoppingMap map(20,10);
 	map.show_map(p,real_p);
 	while(true){
-		string Input;
-		cin>>Input;
+		std::string Input;
+		Input[0] = getch();
 		if(Input=="quit" || Input=="Quit")
 			return 2;
+		
 		char Input_char=tolower(Input[0]);
+		if(Input_char=='q'){
+			return 2;
+		}
 		if(Input_char=='w'){
 			p.move_up(map.mp,real_p);
 		}

@@ -5,7 +5,7 @@
 #ifndef SRC_UI_H
 #define SRC_UI_H
 
-#include <ncurses.h>
+//#include <ncurses.h>
 #include <unordered_map>
 #include <string>
 #include <deque>

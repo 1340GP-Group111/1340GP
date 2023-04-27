@@ -4,8 +4,8 @@
 #include "player.h"
 #include "shop.h"
 //#include "timer.h"
-#include "ui.h"
-#include<conio.h> // to be deleted. <conio.h> is for windows
+//#include "ui.h"
+#include<conio.h> // to be deleted
 #include<iostream>
 #include<ctime>
 
@@ -20,7 +20,7 @@ int Game(Player &p){
 	time_t end_time = time(NULL);
 	int lasted_time = end_time-start_time;
 	mp.show_map(p);
-	while(true){ //	             MAIN LOOP OF DIGGING
+	while(true){ //	             MAIN WHILE LOOP OF DIGGING
 		char Input;
 		Input = getch();
 		if (Input == 'r'){
@@ -51,8 +51,7 @@ int Game(Player &p){
 	}
 }
 int main(){
-
-    //Load the game data
+    // Main menu.
     int load_result = loadFromFile(p);
 	if(load_result == 0){
 		std::cout<<"\n\nLoad data successfully"<<std::endl;
@@ -60,11 +59,10 @@ int main(){
 	else{
 		std::cout<<"\n\nFailed to load data"<<std::endl;
 	}
-    int height = 20;    	
+    int height = 20;    	//	changeable?
     int width = 12;
-	ui::init(height, width);
-	// Main menu.
-    
+//    ui::init(height, width);
+	
 	int signal = 0; //use to quit the whole game; 0-Game 1-Shop 2-Quit 3-Time run out
 	while(signal != 2){
 		signal = Game(p);

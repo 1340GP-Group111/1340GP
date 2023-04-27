@@ -48,7 +48,7 @@ Block::Block(std::string id_, char appearance_, char breaking_app_, int health_,
     status = status_;
 }
 
-void Block::copy(Block target) { //鐢ㄦ潵缁欎竴涓柊鏂瑰潡璧嬪€硷紙gameMap閲岀敤锛?
+void Block::copy(Block target) { //用来给一个新方块赋值（gameMap里用）
     id = target.id;
     appearance = target.appearance;
     breaking_app = target.breaking_app;
@@ -57,7 +57,7 @@ void Block::copy(Block target) { //鐢ㄦ潵缁欎竴涓柊鏂瑰潡璧嬪€
     status = target.status;
 }
 
-int Block::attack(int damage) { //鏀诲嚮鏂瑰潡锛岃緭鍏ユ墸琛€鍊笺€傚鏋滄柟鍧楀凡缁忔槸绌虹殑杩斿洖1, 鏀诲嚮鐮村潖鎴愬姛杩斿洖2,鏈牬鍧忚繑鍥? 
+int Block::attack(int damage) { //攻击方块，输入扣血值。如果方块已经是空的返回1, 攻击破坏成功返回2,未破坏返回0 
     if (health > 0) {
         health = health - damage;
         if (health<=max_health/2){

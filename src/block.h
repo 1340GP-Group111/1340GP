@@ -29,7 +29,7 @@ public:
     Block();
     Block(std::string id_, char appearance_, char breaking_app_, int health_, int value_, int status_);
     void copy(Block target);
-    int attack(int damage);           //attack a block. empty - return 1; broken - return 2; not broken - return 0
+    int attack(int damage);           //攻击方块。输入扣血量，如果方块已经是空的返回1, 攻击破坏成功返回2,未破坏返回0 
 };
 
 //health: Linear growth
