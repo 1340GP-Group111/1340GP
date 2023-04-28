@@ -29,7 +29,7 @@ class Shop {
     	void move_down(std::deque<std::vector<std::string> >& mp,Player& real_p);
     	void move_left(std::deque<std::vector<std::string> >& mp,Player& real_p);
     	void move_right(std::deque<std::vector<std::string> >& mp,Player& real_p);
-    	void interact(std::string tar,Player& real_p);
+    	void interact(const std::string& tar,Player& real_p);
 };
 
 class ShoppingMap{

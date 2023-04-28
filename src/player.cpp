@@ -65,7 +65,7 @@ void Player::move_down(Map &mp) {
 
 void Player::move_right(Map &mp) {
     //Determine whether the square on the right is broken
-    if(x<20){ //width
+    if(x<19){ //width
 			Block &target = mp.mp[this->y][this->x+1];//check obstacles
 			if(target.get_status()==0)
 				x=x+1;
@@ -88,7 +88,8 @@ bool Player::attack(Block& target){ //Deal with the target block
 	}
 
 //player 下面九格status=0
-void Player::bomb(Map &mp) const{
+void Player::bomb(Map &mp){
+    if(bombNum <= 0) return;
     for (int i = y; i < y+3; i++){
         for (int j = x-1; j < x+2; j++){
             //whether to reach the border
@@ -96,6 +97,7 @@ void Player::bomb(Map &mp) const{
                (mp.mp)[i][j].setStatus(0);
         }
     }
+    bombNum--;
 }
 
 //getters and setters

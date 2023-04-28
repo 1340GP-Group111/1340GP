@@ -1,30 +1,30 @@
 #include "block.h"
 
-std::string Block::get_id() {
+std::string Block::get_id() const{
     return id;
 }
 
-char Block::get_appearance() {
+char Block::get_appearance() const{
     return appearance;
 }
 
-char Block::get_breaking_app() {
+char Block::get_breaking_app() const{
     return breaking_app;
 }
 
-int Block::get_max_health() {
+int Block::get_max_health() const{
     return max_health;
 }
 
-int Block::get_health() {
+int Block::get_health() const{
     return health;
 }
 
-int Block::get_value() {
+int Block::get_value() const{
     return value;
 }
 
-int Block::get_status() {
+int Block::get_status() const{
     return status;
 }
 
@@ -102,4 +102,4 @@ Block s_4("red",'$','$',1,160,1);
 Block s_5("pink",'$','$',1,320,1);
 Block s_6("cyan",'$','$',1,640,1);
 //obstacles that cannot be broken:
-Block ob_0("black",'#','*',999,1,1); 
+Block ob_0("black",'X','*',999,1,1);

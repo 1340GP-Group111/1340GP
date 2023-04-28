@@ -1,7 +1,7 @@
 #include "shop.h"
+#include "ui.h"
 #include <iostream>
 #include <algorithm>
-#include <conio.h> // to be deleted
 Shop::Shop(){
     availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now. We can have "☺","☹","♚","☃","☠"
     ownedSkins = {'@'}; // owned skins
@@ -205,7 +205,7 @@ void Shop::move_right(std::deque<std::vector<std::string> > &mp,Player& real_p){
 		interact(mp[y][x+1],real_p);
 	}
 }
-void Shop::interact(std::string tar,Player& real_p){
+void Shop::interact(const std::string& tar,Player& real_p){
 	if(tar=="L"){
 		buyAttack(real_p);
 	}
@@ -233,15 +233,15 @@ ShoppingMap::ShoppingMap(int width_,int height_){
         mp.push_back(temp_line);
     }
 
-    for(std::deque<std::vector<std::string> >::iterator it=mp.begin();it!=mp.end();it++){
-        (*it)[0] = "#";
-        (*it)[width]="#";					
+    for(auto & it : mp){
+        it[0] = "#";
+        it[width]="#";
     }
-    for(std::vector<std::string>::iterator it = (mp[0]).begin();it!=(mp[0]).end();it++){
-        (*it) = "#";
+    for(auto & it : mp[0]){
+        it = "#";
     }
-    for(std::vector<std::string>::iterator it = mp[height].begin();it!=mp[height].end();it++){
-        (*it) = "#";
+    for(auto & it : mp[height]){
+        it = "#";
     }
 
     mp[height/3][2] = "M";
@@ -254,11 +254,11 @@ void ShoppingMap::show_map(Shop& p, Player &real_p){
     std::cout<<"\n\n\n\n\n"<<std::endl;
     int i=0;
     int j=0;
-    for(std::deque<std::vector<std::string> >::iterator it=mp.begin();it!=mp.end();it++){
-        for(std::vector<std::string>::iterator jt = (*it).begin();jt!=(*it).end();jt++){
+    for(auto & it : mp){
+        for(auto & jt : it){
             if(p.y==i && p.x==j)
                 std::cout<<"P";
-            else std::cout<<(*jt);
+            else std::cout<<jt;
             j++;
         }
         if(i==3) std::cout<<"  Here is the base. You can shop for items or upgrade here.";
@@ -278,28 +278,23 @@ int shop(Player & real_p){     //Main Shopping Loop
 	ShoppingMap map(20,10);
 	map.show_map(p,real_p);
 	while(true){
-		std::string Input;
-		Input[0] = getch();
-		if(Input=="quit" || Input=="Quit")
-			return 2;
-		
-		char Input_char=tolower(Input[0]);
-		if(Input_char=='q'){
+		int input_char = ui::listenKeyboard();
+		if(input_char == 'q'){
 			return 2;
 		}
-		if(Input_char=='w'){
+		if(input_char == 'w'){
 			p.move_up(map.mp,real_p);
 		}
-		else if(Input_char=='s'){
+		else if(input_char == 's'){
 			p.move_down(map.mp,real_p);
 		}
-		else if(Input_char=='a'){
+		else if(input_char == 'a'){
 			p.move_left(map.mp,real_p);
 		}
-		else if(Input_char=='d'){
+		else if(input_char == 'd'){
 			p.move_right(map.mp,real_p);
 		}
-		else if(Input_char=='r'){
+		else if(input_char == 'r'){
 			return 0;
 		}
 		

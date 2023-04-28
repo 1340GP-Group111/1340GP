@@ -29,7 +29,7 @@ public:
 	//attack
 	bool attack(Block& target);
     //bomb
-    void bomb(Map &mp) const;
+    void bomb(Map &mp);
     //getters and setters
 
     int getWealth() const;

@@ -1,24 +1,24 @@
 // Author: Cao Rui
 
+#include <ctime>
 #include "timer.h"
-#include <thread>
-#include <future>
-
 
 Timer::Timer(){
-    timeout_flag = false;
+    start_time = 0;
 }
 
-bool Timer::chk_timeout(){
-    return timeout_flag;
+void Timer::start(){  // time limit in second
+    start_time = clock();
 }
 
-void Timer::wait(int time_limit){
-    timeout_flag = false;
-    std::this_thread::sleep_for(std::chrono::seconds(time_limit));
-    timeout_flag = true;
+int Timer::getTime() const{
+    return (int)((long long)(clock() - start_time) / CLOCKS_PER_SEC);
 }
 
-void Timer::start(int time_limit){  // time limit in second
-    std::future<void> fu = std::async(wait, time_limit);
-}
+//bool Timer::chk_timeout() const{
+//    clock_t end_time = clock();
+//    if (end_time - start_time >= time_limit * CLOCKS_PER_SEC){
+//        return true;
+//    }
+//    return false;
+//}

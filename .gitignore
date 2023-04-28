@@ -2,4 +2,6 @@ src/.idea/
 .idea/
 src/*.o
 src/main
+src/*.dat
+src/*.txt
 test*

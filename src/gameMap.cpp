@@ -25,7 +25,7 @@ Map::Map(int height_, int width_){
 Map::Map(){
 	width = 20;
 	height = 12;
-	for (int i=1;i<=height/2;i++){
+	for (int i=0;i<=height/2;i++){
 		std::vector<Block> temp_line;
 		Block temp_block = b_00;
 		for (int j=1;j<=width;j++){
@@ -33,7 +33,7 @@ Map::Map(){
 		}
 		mp.push_back(temp_line);
 	}
-	for (int i=height/2;i<=height;i++){ 
+	for (int i=height/2+1;i<height;i++){
 		std::vector<Block> temp_line;
 		Block temp_block = b_0;
 		for (int j=1;j<=width;j++){
@@ -46,35 +46,35 @@ Map::Map(){
 void Map::show_map(const Player& p){ 				// Print the map
 	std::cout<<"\n\n\n\n\n"<<std::endl;
 	int i=0; int j=0; //iterators cannot be read directly, use i,j to count
-	for(std::deque<std::vector<Block> >::iterator it = mp.begin();it!=mp.end();it++){  
-		for(std::vector<Block>::iterator jt = (*it).begin(); jt!= (*it).end();jt++){
+	for(auto & it : mp){
+		for(auto & jt : it){
 			if (i==p.getY() && j==p.getX()){		//(*jt) is the current block
 				std::cout<<p.getAppearance();
 				j++;
 				continue;
 			}
 			
-			if ((*jt).get_id()=="white")
+			if (jt.get_id()=="white")
 				std::cout<<"\033[0m";								//set the color according to the block name
-			if ((*jt).get_id()=="green")
+			if (jt.get_id()=="green")
 				std::cout<<"\033[32m";
-			else if ((*jt).get_id()=="blue")
+			else if (jt.get_id()=="blue")
 				std::cout<<"\033[34m";
-			else if ((*jt).get_id()=="yellow")
+			else if (jt.get_id()=="yellow")
 				std::cout<<"\033[33m";
-			else if ((*jt).get_id()=="pink")
+			else if (jt.get_id()=="pink")
 				std::cout<<"\033[35m";
-			else if ((*jt).get_id()=="red")
+			else if (jt.get_id()=="red")
 				std::cout<<"\033[31m";
-			else if ((*jt).get_id()=="cyan")
+			else if (jt.get_id()=="cyan")
 				std::cout<<"\033[37m";
-			else if((*jt).get_id()=="black")
+			else if(jt.get_id()=="black")
 				std::cout<<"\033[90m";
-			if((*jt).get_status() == 1)
-				std::cout<<(*jt).get_appearance()<"  "; 	
-			else if((*jt).get_status() == 2)
-				std::cout<<(*jt).get_breaking_app();
-			else if((*jt).get_status() == 0)			
+			if(jt.get_status() == 1)
+				std::cout<<jt.get_appearance()<<"  ";
+			else if(jt.get_status() == 2)
+				std::cout<<jt.get_breaking_app();
+			else if(jt.get_status() == 0)
 				std::cout<<' ';
 			std::cout <<"\033[0m"; 								// reset color to default
 			j++;
@@ -92,7 +92,6 @@ void Map::show_map(const Player& p){ 				// Print the map
 }
 
 void Map::generateLine(const Player& p){ //according to player's depth
-		srand(time(NULL));
 	std::vector<Block> temp_line;
 	Block normal;
 	Block special;

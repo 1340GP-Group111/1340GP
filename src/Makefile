@@ -15,17 +15,17 @@ shop.o: shop.h player.h shop.cpp block.h
 io.o: block.h player.h gameMap.h io.h io.cpp
 	g++ $(CXXFLAGS) -c io.cpp
 
-#timer.o: timer.h timer.cpp
-	#g++ $(CXXFLAGS) -c timer.cpp
+timer.o: timer.h timer.cpp
+	g++ $(CXXFLAGS) -c timer.cpp
 
-#ui.o: ui.h ui.cpp
-	#g++ $(CXXFLAGS) -c ui.cpp -lncurses
+ui.o: ui.h ui.cpp
+	g++ $(CXXFLAGS) -c ui.cpp
 
-main.o: block.h player.h gameMap.h io.h shop.h #timer.h
+main.o: block.h player.h gameMap.h io.h shop.h timer.h
 	g++ $(CXXFLAGS) -c main.cpp
 
-main: block.o player.o gameMap.o io.o  main.o shop.o #ui.o timer.o
-	g++ $(CXXFLAGS) $^ -o $@
+main: block.o player.o gameMap.o io.o  main.o shop.o ui.o timer.o
+	g++ $(CXXFLAGS) $^ -o $@ -lncurses
 
 .PHONY: clean all
 clean:

@@ -5,7 +5,7 @@
 #ifndef SRC_UI_H
 #define SRC_UI_H
 
-//#include <ncurses.h>
+#include <ncurses.h>
 #include <unordered_map>
 #include <string>
 #include <deque>
@@ -27,13 +27,13 @@ namespace ui{
 
     // @brief: Print a string on the screen.
     // @param: The position of the string; The string; The color of the string.
-    void printStr(int y, int x, const std::string&, const std::string&);
+    void printStr(const std::string&, int = 0, int = 0, const std::string& = "white");
 
     // @brief: Draw the game scene border.
     void drawBorder();
 
     // @brirf: Draw the game map and the player.
-    // @param: Game map (by ref); Player (by ref).
+    // @param: game map (by ref); Player (by ref).
     void draw(const std::deque<std::vector<Block>>&, const Player&);
 }
 
