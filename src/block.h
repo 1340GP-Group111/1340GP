@@ -54,4 +54,11 @@ extern Block s_5;
 extern Block s_6;
 //obstacles that cannot be broken:
 extern Block ob_0;
+extern Block a;
+extern Block space;
+//These are merchants
+extern Block MM;
+extern Block MA;
+extern Block ML;
+extern Block MO;
 #endif 
