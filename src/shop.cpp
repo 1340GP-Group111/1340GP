@@ -1,7 +1,9 @@
 #include "shop.h"
 #include "ui.h"
+#include "block.h"
 #include <iostream>
 #include <algorithm>
+#include <curses.h>
 Shop::Shop(){
     availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now. We can have "☺","☹","♚","☃","☠"
     ownedSkins = {'@'}; // owned skins
@@ -36,7 +38,7 @@ void Shop::buyAppearance(Player &player){
     while (true){
         std::cout << "Please input corresponding numeral (enter 0 to exit):" << std::endl;
         while(true){
-            std::cin >> option;
+            std::in>>option;
             if(std::cin.fail()){
                 std::cin.clear();
                 std::cin.ignore(10000, '\n');
@@ -134,10 +136,10 @@ void Shop::buyBomb(Player &player){
     if(player.getWealth() >= BOMB_PRICE){
         player.setWealth(player.getWealth() - BOMB_PRICE);
         player.setBombNum(player.getBombNum() + 1);
-        std::cout << "You bought a bomb. You now have " << player.getBombNum() << " bombs now." << std::endl;
+        std::cout <<"\n"<<"You bought a bomb. You now have " << player.getBombNum() << " bombs now." << std::endl;
         BOMB_PRICE*=10;
     }else{
-        std::cout << "You don't have enough coins." << std::endl;
+        std::cout <<"\n"<< "You don't have enough coins." << std::endl;
     }
 }
 void Shop::buyAttack(Player &player){
@@ -145,10 +147,10 @@ void Shop::buyAttack(Player &player){
         player.setWealth(player.getWealth() - ATTACK_PRICE);
         // amount of attack added per purchase, undetermined
         player.setDamage(player.getDamage() + 0);
-        std::cout << "You bought an attack. You now have " << player.getDamage() << " attack." << std::endl;
+        std::cout <<"\n"<< "You bought an attack. You now have " << player.getDamage() << " attack." << std::endl;
         ATTACK_PRICE*=10;
     }else{
-        std::cout << "You don't have enough gold coins." << std::endl;
+        std::cout <<"\n"<< "You don't have enough gold coins." << std::endl;
     }
 }
 
@@ -157,7 +159,7 @@ void Shop::buyTime(Player &player, int time){
         player.setWealth(player.getWealth() - TIME_PRICE);
         // amount of time added per purchase, undetermined
         player.setOxygen( player.getOxygen() + time );
-        std::cout << "You bought 0 minutes of time. You now have " << player.getOxygen() << " minutes now." << std::endl;
+        std::cout <<"\n"<< "You bought 0 minutes of time. You now have " << player.getOxygen() << " minutes now." << std::endl;
         TIME_PRICE*=10;
     }else{
         std::cout << "You don't have enough gold coins." << std::endl;
@@ -173,49 +175,53 @@ void Shop::set_xy(int x_,int y_){
 	x=x_;
 	y=y_;
 }
-void Shop::move_up(std::deque<std::vector<std::string> > &mp,Player& real_p){
-	if (mp[y-1][x]==" "){
+void Shop::move_up(std::deque<std::vector<Block> > &mp,Player& real_p){
+	Block &target=mp[y-1][x];
+	if (target.get_status()==0){
 		y--;
 	}
-	else if(mp[y-1][x] != "#"){
+	else if(target.get_status() != 3){
 		interact(mp[y-1][x],real_p);
 	}
 }
-void Shop::move_down(std::deque<std::vector<std::string> > &mp,Player& real_p){
-	if (mp[y+1][x]==" "){
+void Shop::move_down(std::deque<std::vector<Block> > &mp,Player& real_p){
+	Block &target=mp[y+1][x];
+	if (target.get_status()==0){
 		y++;
 	}
-	else if(mp[y+1][x] != "#"){
+	else if(target.get_status() != 3){
 		interact(mp[y+1][x],real_p);
 	}
 }
-void Shop::move_left(std::deque<std::vector<std::string> > &mp,Player& real_p){
-	if (mp[y][x-1]==" "){
+void Shop::move_left(std::deque<std::vector<Block> > &mp,Player& real_p){
+	Block &target=mp[y][x-1];
+	if (target.get_status()==0){
 		x--;
 	}
-	else if(mp[y][x-1] != "#"){
+	else if(target.get_status() != 3){
 		interact(mp[y][x-1],real_p);
 	}
 }
-void Shop::move_right(std::deque<std::vector<std::string> > &mp,Player& real_p){
-	if (mp[y][x+1]==" "){
+void Shop::move_right(std::deque<std::vector<Block> > &mp,Player& real_p){
+	Block &target=mp[y][x+1];
+	if (target.get_status()==0){
 		x++;
 	}
-	else if(mp[y][x+1] != "#"){
+	else if(target.get_status() != 3){
 		interact(mp[y][x+1],real_p);
 	}
 }
-void Shop::interact(const std::string& tar,Player& real_p){
-	if(tar=="L"){
+void Shop::interact(const Block& tar,Player& real_p){
+	if(tar.get_status()==5){
 		buyAttack(real_p);
 	}
-	else if(tar=="M"){
+	else if(tar.get_status()==4){
 		buyBomb(real_p);
 	}
-	else if(tar=="A"){
+	else if(tar.get_status()==6){
 		buyAppearance(real_p);
 	}
-	else if(tar=="O"){
+	else if(tar.get_status()==7){
 		buyTime(real_p,5);
 	}
 	
@@ -225,51 +231,63 @@ ShoppingMap::ShoppingMap(int width_,int height_){
     width=width_;
     height=height_;
     for(int i=0;i<=height;i++){
-        std::vector<std::string> temp_line;
+        std::vector<Block> temp_line;
         for(int j=0;j<=width;j++){
-            std::string temp=" ";
+            Block temp= space;
             temp_line.push_back(temp);
         }
         mp.push_back(temp_line);
     }
-
+    Block a = ob_0;
     for(auto & it : mp){
-        it[0] = "#";
-        it[width]="#";
+        it[0] = a;
+        it[width-1]= a;
     }
     for(auto & it : mp[0]){
-        it = "#";
+        it = a;
     }
     for(auto & it : mp[height]){
-        it = "#";
+        it = a;
     }
-
-    mp[height/3][2] = "M";
-    mp[height-height/3][2] = "L";
-    mp[height/3][width-2] = "A";
-    mp[height - height/3][width-2] = "O";
+    Block m=MM;
+    Block l=ML;
+    Block A=MA;
+    Block O=MO;
+    mp[height/3][2] = MM;
+    mp[height-height/3][2] = ML;
+    mp[height/3][width-3] = MA;
+    mp[height - height/3][width-3] = MO;
     }
 		
 void ShoppingMap::show_map(Shop& p, Player &real_p){
-    std::cout<<"\n\n\n\n\n"<<std::endl;
-    int i=0;
-    int j=0;
-    for(auto & it : mp){
-        for(auto & jt : it){
-            if(p.y==i && p.x==j)
-                std::cout<<"P";
-            else std::cout<<jt;
-            j++;
+    for(int i = 0; i < height; i++){
+        for(int j = 0; j < width; j++){
+            char ch;
+            std::string id;
+//            fout << i << " " << j << std::endl;
+            if(!mp[i][j].get_status()){             // There is no block.
+                ch = ' ';
+                id = "blank";
+            }
+            else{
+                ch = mp[i][j].get_appearance();
+                id = mp[i][j].get_id();
+            }
+            int color = ui::color_id[id];
+            attron(COLOR_PAIR(color));
+            mvaddch(i+1, j+1, ch);
+            attroff(COLOR_PAIR(color));
         }
-        if(i==3) std::cout<<"  Here is the base. You can shop for items or upgrade here.";
-        if(i==4) std::cout<<"  Wealth:"<<real_p.getWealth()<<"  Level:"<<real_p.getLevel();
-        if(i==5) std::cout<<"  Bombs:"<<real_p.getBombNum()<<"  Oxygen pack:"<<real_p.getOxygen();
-        if(i==6) std::cout<<"  Type 'r' to start digging";
-        if(i==7) std::cout<<"  Type 'quit' or 'q' to quit the game";
-        j=0;				
-        std::cout<<std::endl;
-        i++;
     }
+    int y = p.y, x = p.x;
+    mvaddch(y+1, x+1, real_p.getAppearance());
+
+    ui::printStr("Current depth: "+std::to_string(real_p.getDepth()), 3, width+5, "white");
+    ui::printStr("Wealth: "+std::to_string(real_p.getWealth())+"\t\tLevel: "+std::to_string(real_p.getLevel()), 4, width+5, "white");
+    ui::printStr("Bomb: "+std::to_string(real_p.getBombNum())+"\t\tOxygen Pack: "+std::to_string(real_p.getOxygen()), 5, width+5, "white");
+    ui::printStr("Use a,s,d to move, b to use a bomb", 7, width+5, "white");
+    ui::printStr("Press 'r' to go back to the base", 8, width+5, "white");
+    refresh();
 }
 
 int shop(Player & real_p){     //Main Shopping Loop
@@ -278,7 +296,7 @@ int shop(Player & real_p){     //Main Shopping Loop
 	ShoppingMap map(20,10);
 	map.show_map(p,real_p);
 	while(true){
-		int input_char = ui::listenKeyboard();
+		int input_char = getch();
 		if(input_char == 'q'){
 			return 2;
 		}
