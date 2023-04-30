@@ -1,8 +1,10 @@
 #ifndef SHOP_H
 #define SHOP_H
-
+#include "ui.h"
+#include "block.h"
 #include "player.h"
 #include <vector>
+#include <curses.h>
 
 class Shop {
     private:
@@ -25,11 +27,11 @@ class Shop {
         int x; // For player to move
     	int y;	
     	void set_xy(int x_,int y_);
-    	void move_up(std::deque<std::vector<std::string> >& mp,Player& real_p);
-    	void move_down(std::deque<std::vector<std::string> >& mp,Player& real_p);
-    	void move_left(std::deque<std::vector<std::string> >& mp,Player& real_p);
-    	void move_right(std::deque<std::vector<std::string> >& mp,Player& real_p);
-    	void interact(const std::string& tar,Player& real_p);
+    	void move_up(std::deque<std::vector<Block> >& mp,Player& real_p);
+    	void move_down(std::deque<std::vector<Block> >& mp,Player& real_p);
+    	void move_left(std::deque<std::vector<Block> >& mp,Player& real_p);
+    	void move_right(std::deque<std::vector<Block> >& mp,Player& real_p);
+    	void interact(const Block& tar,Player& real_p);
 };
 
 class ShoppingMap{
@@ -39,7 +41,7 @@ class ShoppingMap{
 
         int width;
         int height;
-        std::deque<std::vector<std::string> > mp;
+        std::deque<std::vector<Block> > mp;
 };
 
 int shop(Player & real_p);
