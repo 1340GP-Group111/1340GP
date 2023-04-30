@@ -103,3 +103,9 @@ Block s_5("pink",'$','$',1,320,1);
 Block s_6("cyan",'$','$',1,640,1);
 //obstacles that cannot be broken:
 Block ob_0("black",'X','*',999,1,1);
+Block a("black",'#','#',999,1,3);
+Block MM("red",'M','M',999,1,4);
+Block space("white",' ',' ',0,0,0);
+Block ML("red",'L','L',999,1,5);
+Block MA("red",'A','A',999,1,6);
+Block MO("red",'O','O',999,1,7);
