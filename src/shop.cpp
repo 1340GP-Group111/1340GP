@@ -264,7 +264,6 @@ void ShoppingMap::show_map(Shop& p, Player &real_p){
         for(int j = 0; j < width; j++){
             char ch;
             std::string id;
-//            fout << i << " " << j << std::endl;
             if(!mp[i][j].get_status()){             // There is no block.
                 ch = ' ';
                 id = "blank";
