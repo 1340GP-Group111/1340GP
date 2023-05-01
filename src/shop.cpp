@@ -7,10 +7,10 @@
 Shop::Shop(){
     availableSkins = {'@', '#', '$', '%', '^'}; // available skins. Only some characters now. We can have "☺","☹","♚","☃","☠"
     ownedSkins = {'@'}; // owned skins
-    APPEARANCE_PRICE = 0; // appearance price
-    BOMB_PRICE = 0; // bomb price
-    ATTACK_PRICE = 0; // attack price
-    TIME_PRICE = 0;// time price, time is priceless lol, time is gold!
+    APPEARANCE_PRICE = 10; // appearance price
+    BOMB_PRICE = 10; // bomb price
+    ATTACK_PRICE = 10; // attack price
+    TIME_PRICE = 10;// time price, time is priceless lol, time is gold!
 }
 
 void Shop::showShop(Player &player) const{
@@ -114,10 +114,6 @@ void Shop::equipAppearance(Player& player) {
             continue;
         }
 
-        if (option > ownedSkins.size()) {
-            std::cout << "Invalid option." << std::endl;
-            continue;
-        }
         char selectedSkin = ownedSkins[option - 1];
         // see if the skins is already equipped
         if (selectedSkin == player.getAppearance()) {
@@ -142,6 +138,7 @@ void Shop::buyBomb(Player &player){
         std::cout <<"\n"<< "You don't have enough coins." << std::endl;
     }
 }
+
 void Shop::buyAttack(Player &player){
     if(player.getWealth() >= ATTACK_PRICE){
         player.setWealth(player.getWealth() - ATTACK_PRICE);
