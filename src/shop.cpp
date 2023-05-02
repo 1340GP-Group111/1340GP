@@ -58,6 +58,9 @@ void Shop::buyAppearance(Player &player){
 	}
 
         if(option == '0'){
+	    for(int i=0;i<26;i++){
+		    ui::printStr( "                                                        ", i, 1, "white");
+	    }
             break;
         }
 	    
