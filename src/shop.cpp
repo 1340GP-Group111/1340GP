@@ -49,7 +49,7 @@ void Shop::buyAppearance(Player &player){
 //                 std::cin.ignore(10000, '\n');
 //                 break;
 //             }
-		if ('0'<=option && '10'>=option){
+		if ('0'<=option && '9'>=option){
 			break;
         	}
 		else{
@@ -116,7 +116,7 @@ void Shop::equipAppearance(Player& player) {
 //                 break;
 //             }
 		option = getch();
-		if(option<='10' && option>='0'){
+		if(option<='9' && option>='0'){
 			break;
 		}
 		else {
