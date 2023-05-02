@@ -11,8 +11,7 @@
 
 
 int game(Player &p){
-	p.setDepth(0);
-	p.setAppearance('P');	
+	p.setDepth(0);	
 	Map mp;
 	p.playerInitialization(mp);
     Timer timer;
