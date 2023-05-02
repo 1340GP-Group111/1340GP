@@ -48,7 +48,7 @@ Block::Block(std::string id_, char appearance_, char breaking_app_, int health_,
     status = status_;
 }
 
-void Block::copy(Block target) { //用来给一个新方块赋值（gameMap里用）
+void Block::copy(Block target) { //For gamemap, quickly copy property to a block）
     id = target.id;
     appearance = target.appearance;
     breaking_app = target.breaking_app;
@@ -57,7 +57,7 @@ void Block::copy(Block target) { //用来给一个新方块赋值（gameMap里�
     status = target.status;
 }
 
-int Block::attack(int damage) { //攻击方块，输入扣血值。如果方块已经是空的返回1, 攻击破坏成功返回2,未破坏返回0 
+int Block::attack(int damage) { //Attack the block. Input the damage.
     if (health > 0) {
         health = health - damage;
         if (health<=max_health/2){
@@ -86,13 +86,13 @@ void Block::setStatus(int sta){
 //empty blocks:
 Block b_00("white",'#','*',0,0,0); 
 //normal blocks:
-Block b_0("white",'#','*',2,1,1);
-Block b_1("green",'#','*',3,2,1);
-Block b_2("blue",'#','*',4,4,1);
-Block b_3("yellow",'#','*',5,8,1);
-Block b_4("red",'#','*',6,16,1);
-Block b_5("pink",'#','*',7,32,1);
-Block b_6("cyan",'#','*',8,64,1);
+Block b_0("white",'#','*',6,1,1);
+Block b_1("green",'#','*',9,2,1);
+Block b_2("blue",'#','*',12,4,1);
+Block b_3("yellow",'#','*',15,8,1);
+Block b_4("red",'#','*',18,16,1);
+Block b_5("pink",'#','*',21,32,1);
+Block b_6("cyan",'#','*',24,64,1);
 //special blocks with higher values:
 Block s_0("white",'$','$',1,10,1);
 Block s_1("green",'$','$',1,20,1);
