@@ -31,14 +31,14 @@ void Shop::buyAppearance(Player &player){
     for(int i=0; i<availableSkins.size(); i++){
         if(std::find(ownedSkins.begin(), ownedSkins.end(), availableSkins[i]) == ownedSkins.end()){ 
             //std::cout << i+1 << ". " << availableSkins[i] << " (" << APPEARANCE_PRICE << " coins)" << std::endl;
-    		ui::printStr(std::to_string(i+1)+". "+availableSkins[i]+" ("+ std::to_string(APPEARANCE_PRICE)+" coins)", 16+i, 1, "white");
+    		ui::printStr(std::to_string(i+1)+". "+availableSkins[i]+" ("+ std::to_string(APPEARANCE_PRICE)+" coins)", 16+i+1, 1, "white");
         }
     }
 
     // return to main, showShop again
     while (true){
         //std::cout << "Please input corresponding numeral (enter 0 to exit):" << std::endl;
-	ui::printStr("Please input corresponding numeral (enter 0 to exit):", 16+availableSkins.size(), 1, "white");
+	ui::printStr("Please input corresponding numeral (enter 0 to exit):", 16+availableSkins.size()+1, 1, "white");
         while(true){
 		option = getch();
 //             if(std::cin.fail()){
@@ -313,7 +313,7 @@ void ShoppingMap::show_map(Shop& p, Player &real_p){
 int shop(Player & real_p){     //Main Shopping Loop
 	Shop p;
 	p.set_xy(10,5);
-	ShoppingMap map(20,12);
+	ShoppingMap map(20,11);
 	map.show_map(p,real_p);
 	while(true){
 		int input_char = getch();
