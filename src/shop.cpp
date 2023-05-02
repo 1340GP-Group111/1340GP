@@ -289,7 +289,7 @@ void ShoppingMap::show_map(Shop& p, Player &real_p){
 int shop(Player & real_p){     //Main Shopping Loop
 	Shop p;
 	p.set_xy(10,5);
-	ShoppingMap map(20,10);
+	ShoppingMap map(20,12);
 	map.show_map(p,real_p);
 	while(true){
 		int input_char = getch();
