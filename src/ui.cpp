@@ -38,6 +38,7 @@ int ui::listenKeyboard(){
 void ui::printStr(const std::string& str, const int y, const int x, const std::string& color){
     int num = ui::color_id[color];
     attron(COLOR_PAIR(num));
+    mvaddstr(y, x, "                                                                                                 ");
     mvaddstr(y, x, str.c_str());
     attroff(COLOR_PAIR(num));
     refresh();
