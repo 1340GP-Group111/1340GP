@@ -278,10 +278,12 @@ void ShoppingMap::show_map(Shop& p, Player &real_p){
     int y = p.y, x = p.x;
     mvaddch(y+1, x+1, real_p.getAppearance());
 
-    ui::printStr("Current depth: "+std::to_string(real_p.getDepth()), 3, width+5, "white");
-    ui::printStr("Wealth: "+std::to_string(real_p.getWealth())+"\t\tLevel: "+std::to_string(real_p.getLevel()), 4, width+5, "white");
-    ui::printStr("Bomb: "+std::to_string(real_p.getBombNum())+"\t\tOxygen Pack: "+std::to_string(real_p.getOxygen()), 5, width+5, "white");
-    ui::printStr("Use a,s,d to move, b to use a bomb", 7, width+5, "white");
+    ui::printStr("Wealth: "+std::to_string(real_p.getWealth())+"\t\tLevel: "+std::to_string(real_p.getLevel()), 2, width+5, "white");
+    ui::printStr("Bomb: "+std::to_string(real_p.getBombNum())+"\t\tOxygen Pack: "+std::to_string(real_p.getOxygen()), 3, width+5, "white");
+    ui::printStr("Talk with 'L' to upgrade your level", 4, width+5, "white");
+    ui::printStr("Talk with 'M' to buy bombs", 5, width+5, "white");
+    ui::printStr("Talk with 'A' to buy new skins ", 6, width+5, "white");
+    ui::printStr("Talk with 'O' to expand your oxygen pack", 7, width+5, "white");
     ui::printStr("Press 'r' to go back to the base", 8, width+5, "white");
     refresh();
 }
