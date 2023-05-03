@@ -31,6 +31,5 @@ main: block.o player.o gameMap.o io.o  main.o shop.o ui.o timer.o
 clean:
 	rm *.o
 	rm main
-	rm *.gch
 
 all: main
