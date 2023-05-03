@@ -14,11 +14,11 @@ int game(Player &p){
 	p.setDepth(0);	
 	Map mp;
 	p.playerInitialization(mp);
-    Timer timer;
-    timer.start();
-//	time_t start_time = time(NULL);// start counting the time
-//	time_t end_time = time(NULL);
-//	int lasted_time = end_time-start_time;
+    //Timer timer;
+    //timer.start();
+	time_t start_time = time(NULL);// start counting the time
+	time_t end_time = time(NULL);
+	int lasted_time = end_time-start_time;
     ui::draw(mp.mp, p);
 //	mp.show_map(p);
 	while(true){ //	             MAIN WHILE LOOP OF DIGGING
@@ -39,9 +39,9 @@ int game(Player &p){
 			p.bomb(mp);
 		}
 		
-//		end_time = time(NULL); 		//Checking the remaining time for player
-//		lasted_time = end_time-start_time;
-		p.setTime(p.getOxygen() - timer.getTime());
+		end_time = time(NULL); 		//Checking the remaining time for player
+		lasted_time = end_time-start_time;
+		p.setTime(p.getOxygen() - lasted_time);
 		if(p.getTime()<0){
 			return 3;
 		}
@@ -87,10 +87,13 @@ int main(){
 		}
 		if (signal == 3){
             clear();
-            ui::printStr("Time Run Out!");
-            ui::printStr("Going into the shop in 2s", 2, 0);
+            ui::printStr("Time Run Out!",16,1);
+            ui::printStr("Going into the shop in 2s", 17, 1);
             sleep(2);
+	    ui::printStr("                  ",16,1);
+	    ui::printStr("                                ", 17, 1);
 			signal = shop(p);
+		
 		}
 	}
 
