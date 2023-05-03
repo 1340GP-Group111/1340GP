@@ -38,7 +38,7 @@ int ui::listenKeyboard(){
 void ui::printStr(const std::string& str, const int y, const int x, const std::string& color){
     int num = ui::color_id[color];
     attron(COLOR_PAIR(num));
-    mvaddstr(y, x, "                                                                                                 ");
+    mvaddstr(y, x, "                                                                                 ");
     mvaddstr(y, x, str.c_str());
     attroff(COLOR_PAIR(num));
     refresh();
@@ -87,8 +87,8 @@ void ui::draw(const std::deque<std::vector<Block>>& mp, const Player& player){
     mvaddch(y+1, x+1, player.getAppearance());
 
     ui::printStr("Current depth: "+std::to_string(player.getDepth()), 3, width+5, "white");
-    ui::printStr("Wealth: "+std::to_string(player.getWealth())+"\t\tLevel: "+std::to_string(player.getLevel()), 4, width+5, "white");
-    ui::printStr("Bomb: "+std::to_string(player.getBombNum())+"\t\tOxygen Pack: "+std::to_string(player.getOxygen()), 5, width+5, "white");
+    ui::printStr("Wealth: "+std::to_string(player.getWealth())+"\t\tDamage: "+std::to_string(player.getDamage()), 4, width+5, "white");
+    ui::printStr("Bomb: "+std::to_string(player.getBombNum())+"\t\tOxygen Pack: "+std::to_string(player.getTime())+"/"+std::to_string(player.getOxygen()), 5, width+5, "white");
     ui::printStr("Use a,s,d to move, b to use a bomb", 7, width+5, "white");
     ui::printStr("Press 'r' to go back to the base", 8, width+5, "white");
     refresh();
