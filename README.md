@@ -10,15 +10,33 @@ a、d | Dig left and right
 s | Dig Downwards
 r | Return to base camp
 w、a、s、d | Move around in base camp
+q | save and quit the game
 
-## Item Description
-Name | Purpose 
+## Blocks
+Blocks | features
 ---- | ----
-Oxygen Tank | Replenish Oxygen Value
-Digging Equipment| Increase Digging Efficiency
-Bomb | Blast through hard rocks
+'#' | you can break this block but the Hardness level may increase as you get deeper
+'X' | This rock is impregnable but you can still blast through it by bombs
+'$' | You can get more coins if you collect this kind of block
 
-P.S.: You can also buy new character models!
+## Merchants Description
+Name | Items |Purpose 
+---- | ---- | ----
+L | Digging equipments| Increase Digging Efficiency and Damage
+O | Oxygen Pack |Extend the maximum exploration time underground.
+M |Bomb | Blast through hard rocks
+A | skins | Change your appearance
+
+## Item Prices
+
+ Items | Prices 
+ ---- | ----
+Digging equipments| 500 coins for the first time (price*3 for every extra unit)
+Oxygen Pack | 200 coins for the first time  (price*2 for every extra unit)
+Bomb | 50 coins
+skins | 1000 coins
+
+
 
 ## Game Over
 The game ends when your oxygen value reaches zero.
