@@ -157,31 +157,31 @@ void Shop::buyBomb(Player &player){
 }
 
 void Shop::buyAttack(Player &player){
-    int price_a = ATTACK_PRICE*pow(3, player.getDamage()-1);
-    if(player.getWealth() >= ATTACK_PRICE*pow(3, player.getDamage()-1)){
-        player.setWealth(player.getWealth()-ATTACK_PRICE*pow(3, player.getDamage()-1));
+    int price_aa=ATTACK_PRICE*pow(3,player.getDamage()-1);
+    int price_a= std::min(price_aa,364500);
+    if(player.getWealth() >= price_a){
+        player.setWealth(player.getWealth() - price_a);
         // amount of attack added per purchase, undetermined
-        player.setDamage(player.getDamage()+1);
+        player.setDamage(player.getDamage() + 1);
         //std::cout <<"\n"<< "You bought an attack. You now have " << player.getDamage() << " attack." << std::endl;
-        ui::printStr("You bought an attack. You now have "+std::to_string(player.getDamage())+" attack.", 16, 1,
-                     "white");
+	ui::printStr( "You bought an attack. You now have " + std::to_string(player.getDamage())+" attack.", 16, 1, "white");
 
-    } else{
-        ui::printStr("You don't have enough gold coins. (Price: "+std::to_string(price_a)+" coins)", 16, 1, "white");
+    }else{
+	ui::printStr( "You don't have enough gold coins. (Price: "+std::to_string(price_a)+" coins)", 16, 1, "white");
     }
 }
 
 void Shop::buyTime(Player &player, int time){
-    int price_o = TIME_PRICE*pow(2, player.getOxygen()/5-2);
-    if(player.getWealth() >= TIME_PRICE*pow(2, player.getOxygen()/5-2)){
-        player.setWealth(player.getWealth()-TIME_PRICE*pow(2, player.getOxygen()/5-2));
+    int price_oo=TIME_PRICE*pow(2,player.getOxygen()/5-2);
+    int price_o=std::min(price_oo,204800);
+    if(player.getWealth() >= price_o){
+        player.setWealth(player.getWealth() - price_o);
         // amount of time added per purchase, undetermined
-        player.setOxygen(player.getOxygen()+time);
+        player.setOxygen( player.getOxygen() + time );
         //std::cout <<"\n"<< "You bought 0 minutes of time. You now have " << player.getOxygen() << " minutes now." << std::endl;
-        ui::printStr("You bought"+std::to_string(time)+"units of oxygen. Your oxygen pack is "+
-                     std::to_string(player.getOxygen())+" now.", 16, 1, "white");
-    } else{
-        ui::printStr("You don't have enough gold coins. (Price: "+std::to_string(price_o)+" coins)", 16, 1, "white");
+	ui::printStr( "You bought "+std::to_string(time) +" units of oxygen. Your oxygen pack is " + std::to_string(player.getOxygen())+" now.", 16, 1, "white");
+    }else{
+	ui::printStr( "You don't have enough gold coins. (Price: "+std::to_string(price_o)+" coins)", 16, 1, "white");
     }
 }
 
