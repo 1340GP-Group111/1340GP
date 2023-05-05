@@ -14,12 +14,31 @@ Shop::Shop(){
     TIME_PRICE = 200;// time price, time is priceless lol, time is gold!
 }
 
+
+// to equip appearance
+void Shop::equipAppearance(Player& player) {
+    char option;
+	ui::printStr( "Choose an appearance to equip (enter 0 to exit):", 16, 1, "white");
+    // list available owned skins
+    for (int i = 0; i < ownedSkins.size(); i++) {
+        //std::cout << i + 1 << ". " << ownedSkins[i] << std::endl;
+	    ui::printStr( std::to_string(i + 1)+". "+ownedSkins[i], 16+i+1, 1, "white");
+    }
+
+    
 void Shop::buyAppearance(Player &player){
     char option, choice;  //option is the number of the skin that the user want to buy   choice means whether the player want to buy the skin
     ui::printStr("Choose an appearance to change (enter 0 to exit):", 16, 1, "white");
     // if not own, permitted to buy the skin 
     for(int i = 0; i < availableSkins.size(); i++){
-
+//             if(std::cin.fail()){
+//                 std::cin.clear();
+//                 std::cin.ignore(10000, '\n');
+//                 std::cout << "Invalid input: Input must be an integer." << std::endl;
+//             } else {
+//                 std::cin.ignore(10000, '\n');
+//                 break;
+//             }
         //std::cout << i+1 << ". " << availableSkins[i] << " (" << APPEARANCE_PRICE << " coins)" << std::endl;
         ui::printStr(std::to_string(i+1)+". "+availableSkins[i]+" ("+std::to_string(APPEARANCE_PRICE)+" coins)", 16+i+1,
                      1, "white");
@@ -79,57 +98,7 @@ void Shop::buyAppearance(Player &player){
     }
 
 }
-// to equip appearance
-void Shop::equipAppearance(Player& player) {
-    char option;
-	ui::printStr( "Choose an appearance to equip (enter 0 to exit):", 16, 1, "white");
-    // list available owned skins
-    for (int i = 0; i < ownedSkins.size(); i++) {
-        //std::cout << i + 1 << ". " << ownedSkins[i] << std::endl;
-	    ui::printStr( std::to_string(i + 1)+". "+ownedSkins[i], 16+i+1, 1, "white");
-    }
 
-    while (true){
-	ui::printStr( "Please input corresponding numeral (enter 0 to exit):", 16+ownedSkins.size()+1, 1, "white");
-        while(true){
-//             std::cin >> option;
-//             if(std::cin.fail()){
-//                 std::cin.clear();
-//                 std::cin.ignore(10000, '\n');
-//                 std::cout << "Invalid input: Input must be an integer." << std::endl;
-//             } else {
-//                 std::cin.ignore(10000, '\n');
-//                 break;
-//             }
-		option = getch();
-		if(option<='9' && option>='0'){
-			break;
-		}
-		else {
-			ui::printStr( "Invalid input: Input must be an integer.", 16+ownedSkins.size()+2, 1, "white");
-		}
-        }
-
-        if(option == '0'){ //
-            break;
-        }
-	int int_option = option - 48;
-        if(int_option > ownedSkins.size()){
-		ui::printStr( "Invalid option: Input exceeds appearance number.", 16+ownedSkins.size()+3, 1, "white");
-            	continue;
-        }
-
-        char selectedSkin = ownedSkins[int_option - 1];
-        // see if the skins is already equipped
-        if (selectedSkin == player.getAppearance()) {
-		ui::printStr( "You already have this appearance equipped. (Enter 0 to exit)", 16+ownedSkins.size()+3, 1, "white");
-           	continue;
-        }
-        player.setAppearance(selectedSkin);
-	ui::printStr( "You equipped a new appearance.", 16+ownedSkins.size()+4, 1, "white");
-    }
-}
-// again
 
 void Shop::buyBomb(Player &player){
     if(player.getWealth() >= BOMB_PRICE){
