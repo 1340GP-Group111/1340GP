@@ -27,7 +27,7 @@ The hardness of the soil will increase with depth, making it more difficult to d
 
 Operation | Description  
 
----- | ---- 
+     ---- | ---- 
 
 a、d | Dig left and right 
 
