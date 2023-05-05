@@ -14,35 +14,15 @@ Shop::Shop(){
     TIME_PRICE = 200;// time price, time is priceless lol, time is gold!
 }
 
-
-// to equip appearance
-void Shop::equipAppearance(Player& player) {
-    char option;
-	ui::printStr( "Choose an appearance to equip (enter 0 to exit):", 16, 1, "white");
-    // list available owned skins
-    for (int i = 0; i < ownedSkins.size(); i++) {
-        //std::cout << i + 1 << ". " << ownedSkins[i] << std::endl;
-	    ui::printStr( std::to_string(i + 1)+". "+ownedSkins[i], 16+i+1, 1, "white");
-    }
-
     
 void Shop::buyAppearance(Player &player){
     char option, choice;  //option is the number of the skin that the user want to buy   choice means whether the player want to buy the skin
     ui::printStr("Choose an appearance to change (enter 0 to exit):", 16, 1, "white");
     // if not own, permitted to buy the skin 
     for(int i = 0; i < availableSkins.size(); i++){
-//             if(std::cin.fail()){
-//                 std::cin.clear();
-//                 std::cin.ignore(10000, '\n');
-//                 std::cout << "Invalid input: Input must be an integer." << std::endl;
-//             } else {
-//                 std::cin.ignore(10000, '\n');
-//                 break;
-//             }
-        //std::cout << i+1 << ". " << availableSkins[i] << " (" << APPEARANCE_PRICE << " coins)" << std::endl;
         ui::printStr(std::to_string(i+1)+". "+availableSkins[i]+" ("+std::to_string(APPEARANCE_PRICE)+" coins)", 16+i+1,
                      1, "white");
-
+//print all the availiable appearances
     }
 
     // return to main, showShop again
@@ -52,14 +32,6 @@ void Shop::buyAppearance(Player &player){
         while(true){
             ui::printStr("                                                 ", 16+availableSkins.size()+1, 1, "white");
             option = getch();
-//             if(std::cin.fail()){
-//                 std::cin.clear();
-//                 std::cin.ignore(10000, '\n');
-//                 std::cout << "Invalid input: Input must be an integer." << std::endl;
-//             } else {
-//                 std::cin.ignore(10000, '\n');
-//                 break;
-//             }
             if('0' <= option && '9' >= option){
                 break;
             } else{
@@ -104,7 +76,7 @@ void Shop::buyBomb(Player &player){
     if(player.getWealth() >= BOMB_PRICE){
         player.setWealth(player.getWealth()-BOMB_PRICE);
         player.setBombNum(player.getBombNum()+1);
-        //std::cout <<"\n"<<"You bought a bomb. You now have " << player.getBombNum() << " bombs now." << std::endl;
+        //buy bomb and add to the bomb number
         ui::printStr("You bought a bomb. You now have "+std::to_string(player.getBombNum())+" bombs now.", 16, 1,
                      "white");
     } else{
@@ -149,6 +121,7 @@ void Shop::set_xy(int x_, int y_){         //store the position of player
 
 void Shop::move_up(std::deque<std::vector<Block> > &mp, Player &real_p){
     Block &target = mp[y-1][x];
+//check the status the the block
     if(target.get_status() == 0){
         y--;
     } else if(target.get_status() != 3){
@@ -158,6 +131,7 @@ void Shop::move_up(std::deque<std::vector<Block> > &mp, Player &real_p){
 
 void Shop::move_down(std::deque<std::vector<Block> > &mp, Player &real_p){
     Block &target = mp[y+1][x];
+//check the status the the block
     if(target.get_status() == 0){
         y++;
     } else if(target.get_status() != 3){
@@ -167,6 +141,7 @@ void Shop::move_down(std::deque<std::vector<Block> > &mp, Player &real_p){
 
 void Shop::move_left(std::deque<std::vector<Block> > &mp, Player &real_p){
     Block &target = mp[y][x-1];
+//check the status the the block
     if(target.get_status() == 0){
         x--;
     } else if(target.get_status() != 3){
@@ -176,6 +151,7 @@ void Shop::move_left(std::deque<std::vector<Block> > &mp, Player &real_p){
 
 void Shop::move_right(std::deque<std::vector<Block> > &mp, Player &real_p){
     Block &target = mp[y][x+1];
+//check the status the the block
     if(target.get_status() == 0){
         x++;
     } else if(target.get_status() != 3){
@@ -218,10 +194,10 @@ ShoppingMap::ShoppingMap(int width_, int height_){
     for(auto &it: mp[height-1]){
         it = a;
     }
-    Block m = MM;
-    Block l = ML;
-    Block A = MA;
-    Block O = MO;
+    Block m = MM;  //mechant M
+    Block l = ML;   //mechant L
+    Block A = MA;  //mechant A
+    Block O = MO;   //mechant O
     // These are the merchants 
     mp[height/3][2] = MM;
     mp[height-height/3][2] = ML;
@@ -289,6 +265,7 @@ int shop(Player &real_p){
             ui::printStr("                                                 ", 2, 25, "white");
             ui::printStr("                                                 ", 6, 25, "white");
             ui::printStr("                                         ", 9, 25, "white");
+	    // refresh the interface
             return 0;
         }
 
