@@ -4,11 +4,11 @@
 
  Name | UID | Nickname
  ---- | ---- | ----
-Cao Rui | 3035974303 |
-Deng Zihong | 3035962465 | 
-Duan Xihan | 3035974042 |
+Cao Rui | 3035974303 | memset0x3f
+Deng Zihong | 3035962465 | Eric-4044
+Duan Xihan | 3035974042 | duanxihan
 Fu Yeqiao | 3035974664 | fyq5166
-He Minggao | 3035973373 |
+He Minggao | 3035973373 | St-box
 
  
 
