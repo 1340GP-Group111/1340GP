@@ -4,14 +4,10 @@
 
  Name | UID 
  ---- | ----
-Cao Rui |	3035974303 
-
+Cao Rui | 3035974303 
 Deng Zihong | 3035962465 
-
-Duan Xihan	| 3035974042 
-
+Duan Xihan | 3035974042 
 Fu Yeqiao | 3035974664 
-
 He Minggao | 3035973373 
 
  
