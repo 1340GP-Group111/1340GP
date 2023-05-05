@@ -48,8 +48,6 @@ int main(){
     clear();
     ui::drawBorder();  //draw gameMap
 
-    //sleep(2);
-    //endwin();
 
     int signal = 0;        //use to quit the whole game; 0-game 1-Shop 2-Quit 3-Time run out
 
@@ -109,7 +107,7 @@ int game(Player &p){
     int lasted_time = end_time-start_time;
 
     ui::draw(mp.mp, p);        //draw gameMap
-    //mp.show_map(p);
+    
     
     while(true){               //MAIN WHILE LOOP OF DIGGING
 
