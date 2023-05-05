@@ -1,10 +1,10 @@
 #include "gameMap.h"
 #include "player.h"
 
-Map::Map(int height_, int width_){
+Map::Map(int height_, int width_){			//Constructor, generate a map with inputted height and width
 	width = width_;
 	height = height_;
-	for (int i=1;i<=height/2;i++){
+	for (int i=1;i<=height/2;i++){			//The upper half is created as empty.
 		std::vector<Block> temp_line;
 		Block temp_block = b_0;
 		for (int j=1;j<=width;j++){
@@ -12,7 +12,7 @@ Map::Map(int height_, int width_){
 		}
 		mp.push_back(temp_line);
 	}
-	for (int i=height/2;i<=height;i++){ 
+	for (int i=height/2;i<=height;i++){ 		//The lower half is created with solid blocks.
 		std::vector<Block> temp_line;
 		Block temp_block = b_0;
 		for (int j=1;j<=width;j++){
@@ -22,7 +22,7 @@ Map::Map(int height_, int width_){
 	}
 }
 
-Map::Map(){
+Map::Map(){						//Default Constructor
 	width = 20;
 	height = 12;
 	for (int i=0;i<=height/2;i++){
@@ -43,19 +43,19 @@ Map::Map(){
 	}
 }
 
-void Map::show_map(const Player& p){ 				// Print the map
+void Map::show_map(const Player& p){ 				//The function of printing the map
 	std::cout<<"\n\n\n\n\n"<<std::endl;
 	int i=0; int j=0; //iterators cannot be read directly, use i,j to count
 	for(auto & it : mp){
 		for(auto & jt : it){
-			if (i==p.getY() && j==p.getX()){		//(*jt) is the current block
+			if (i==p.getY() && j==p.getX()){		//(*jt) represents the current block
 				std::cout<<p.getAppearance();
 				j++;
 				continue;
 			}
 			
 			if (jt.get_id()=="white")
-				std::cout<<"\033[0m";								//set the color according to the block name
+				std::cout<<"\033[0m";			//Set the block color according to the block id
 			if (jt.get_id()=="green")
 				std::cout<<"\033[32m";
 			else if (jt.get_id()=="blue")
@@ -76,10 +76,10 @@ void Map::show_map(const Player& p){ 				// Print the map
 				std::cout<<jt.get_breaking_app();
 			else if(jt.get_status() == 0)
 				std::cout<<' ';
-			std::cout <<"\033[0m"; 								// reset color to default
+			std::cout <<"\033[0m"; 				// Reset color to default
 			j++;
 		}
-		j=0;	// End of each line
+		j=0;				// End of printing a line of the map
 		if(i==3) std::cout<<"\t current depth:"<<p.getDepth();
 		else if(i==4) std::cout<<"\t wealth:"<<p.getWealth()<<"  level:"<<p.getLevel();
 		else if(i==5) std::cout<<"\t Bombs:"<<p.getBombNum()<<"  Oxygen pack:"<<p.getTime()<<"\\"<<p.getOxygen();
@@ -91,14 +91,14 @@ void Map::show_map(const Player& p){ 				// Print the map
 	}
 }
 
-void Map::generateLine(const Player& p){ //according to player's depth
+void Map::generateLine(const Player& p){ 	//Generate a new line according to player's depth
 	std::vector<Block> temp_line;
 	Block normal;
 	Block special;
 	normal.copy(b_0);
 	special.copy(b_0);
 	
-	if(p.getDepth()>10&&p.getDepth()<=20)					//check depth
+	if(p.getDepth()>10&&p.getDepth()<=20)		//Check depth range
 	{
 		normal.copy(b_1);
 		special.copy(s_1);
@@ -123,7 +123,7 @@ void Map::generateLine(const Player& p){ //according to player's depth
 		normal.copy(b_6); 
 		special.copy(s_6);
 	}
-	for (int j=1;j<=width;j++){				//randomly generate normal and special blocks
+	for (int j=1;j<=width;j++){				//Randomly generate normal and special blocks into the new line
 		int num = rand()%10+1;
 		if (num%5 == 0) 
 			temp_line.push_back(special);
@@ -139,11 +139,4 @@ void Map::generateLine(const Player& p){ //according to player's depth
 	
 }
 
-//int Map::getWidth() const{
-//    return Map::WIDTH;
-//}
-//
-//
-//int Map::getHeight() const{
-//    return Map::HEIGHT;
-//}
+
