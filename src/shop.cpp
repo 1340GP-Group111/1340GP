@@ -26,7 +26,7 @@ void Shop::showShop(Player &player) const{
 }
 
 void Shop::buyAppearance(Player &player){
-    char option, choice;
+    char option, choice;  //option is the number of the skin that the user want to buy   choice means whether the player want to buy the skin
     ui::printStr("Choose an appearance to change (enter 0 to exit):", 16, 1, "white");
     // if not own, permitted to buy the skin 
     for(int i = 0; i < availableSkins.size(); i++){
@@ -61,13 +61,13 @@ void Shop::buyAppearance(Player &player){
 
         if(option == '0'){
             for(int i = 16; i < 26; i++){
-                ui::printStr("                                                        ", i, 1, "white");
+                ui::printStr("                                                        ", i, 1, "white");  //refresh the interface
             }
             break;
         }
 
         int int_option = option-48; // Char -> Int
-        if(int_option > availableSkins.size()){
+        if(int_option > availableSkins.size()){    
             ui::printStr("Invalid option: Input exceeds appearance number.", 16+availableSkins.size()+2, 1, "white");
             continue;
         }
@@ -104,8 +104,8 @@ void Shop::buyBomb(Player &player){
 }
 
 void Shop::buyAttack(Player &player){
-    int price_aa=ATTACK_PRICE*pow(3,player.getDamage()-1);
-    int price_a= std::min(price_aa,364500);
+    int price_aa=ATTACK_PRICE*pow(3,player.getDamage()-1); //turn ATTACK_PRICE*pow(3,player.getDamage()-1) into integer
+    int price_a= std::min(price_aa,364500);     // set price seiling of attack
     if(player.getWealth() >= price_a){
         player.setWealth(player.getWealth() - price_a);
         // amount of attack added per purchase, undetermined
@@ -119,8 +119,8 @@ void Shop::buyAttack(Player &player){
 }
 
 void Shop::buyTime(Player &player, int time){
-    int price_oo=TIME_PRICE*pow(2,player.getOxygen()/5-2);
-    int price_o=std::min(price_oo,204800);
+    int price_oo=TIME_PRICE*pow(2,player.getOxygen()/5-2); //turn TIME_PRICE*pow(2,player.getOxygen()/5-2) into integer
+    int price_o=std::min(price_oo,204800);  // set price ceiling for oxygen
     if(player.getWealth() >= price_o){
         player.setWealth(player.getWealth() - price_o);
         // amount of time added per purchase, undetermined
@@ -137,7 +137,7 @@ void Shop::exitShop(){
 }
 
 
-void Shop::set_xy(int x_, int y_){
+void Shop::set_xy(int x_, int y_){         //store the position of player
     x = x_;
     y = y_;
 }
@@ -217,10 +217,12 @@ ShoppingMap::ShoppingMap(int width_, int height_){
     Block l = ML;
     Block A = MA;
     Block O = MO;
+    // These are the merchants 
     mp[height/3][2] = MM;
     mp[height-height/3][2] = ML;
     mp[height/3][width-3] = MA;
     mp[height-height/3][width-3] = MO;
+   // Set the initial position of merchants
 }
 
 void ShoppingMap::show_map(Shop &p, Player &real_p){
@@ -258,8 +260,8 @@ void ShoppingMap::show_map(Shop &p, Player &real_p){
 }
 
 int shop(Player &real_p){
-    ui::drawBorder();
-//Main Shopping Loo
+    ui::drawBorder();   //drow the border again, or it will be covered
+//Main Shopping Loop
     Shop p;
     p.set_xy(10, 5);
     ShoppingMap map(20, 12);
@@ -267,8 +269,9 @@ int shop(Player &real_p){
     while(true){
         int input_char = getch();
         if(input_char == 'q'){
-            return 2;
+            return 2;    //back to the main game
         }
+	
         if(input_char == 'w'){
             p.move_up(map.mp, real_p);
         } else if(input_char == 's'){
