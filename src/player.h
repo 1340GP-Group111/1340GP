@@ -63,7 +63,7 @@ public:
     ~Player()=default;
 
     //movement
-
+    //for shop but do not use now
     void move_left();
     void move_right();
     void move_down();
