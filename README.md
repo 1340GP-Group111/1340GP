@@ -99,7 +99,7 @@ We use a deque （deque <vector<Block> >） to store the game map. 	 When the pl
 
 ## Player 
 
-To better manage the game flow, we define the class “Player”. A player has member properties of appearance, bombNumber, damage, wealth, oxygen, x, y. The player records its current position on the map, its depth, and the number of items it owns. 
+To better manage the game flow, we define the class “Player”. A player has member properties of appearance, bombNumber, damage, wealth, oxygen, x, y, time. The player records its current position on the map, its depth, and the number of items it owns. 
 
  
 
