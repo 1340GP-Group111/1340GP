@@ -26,8 +26,8 @@ public:
     int get_value() const;
     int get_status() const;
     
-    Block();
-    Block(std::string id_, char appearance_, char breaking_app_, int health_, int value_, int status_);
+    Block();                           //Default constructor
+    Block(std::string id_, char appearance_, char breaking_app_, int health_, int value_, int status_); //Constructor
     void copy(Block target);
     int attack(int damage);           //Attack the block. Input the damage. Failed to break it:return 0; Empty:return 1; Broken:return 2
 };
