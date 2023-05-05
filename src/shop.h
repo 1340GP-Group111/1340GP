@@ -9,7 +9,6 @@
 class Shop {
     private:
         std::vector<char> availableSkins;
-        std::vector<char> ownedSkins;
         int APPEARANCE_PRICE;
         int BOMB_PRICE;
         int ATTACK_PRICE;

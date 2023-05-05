@@ -43,7 +43,7 @@ Map::Map(){						//Default Constructor
 	}
 }
 
-void Map::show_map(const Player& p){ 				//The function of printing the map
+void Map::show_map(const Player& p){//The function of printing the map
 	std::cout<<"\n\n\n\n\n"<<std::endl;
 	int i=0; int j=0; //iterators cannot be read directly, use i,j to count
 	for(auto & it : mp){

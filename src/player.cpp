@@ -4,7 +4,7 @@
 void Player::move(int direction){
     switch(direction)
     {
-        case 1 :                 //move lefe
+        case 1 :                 //move left
             x--;                 //x is the location in horizontal, x-1 move left 1 unit
             break;
 
@@ -106,10 +106,9 @@ bool Player::attack(Block& target){                    //Deal with the target bl
 //use bomb
 void Player::bomb(Map &mp){    //accepts a map parameter
     
-    if(bombNum <= 0) return;   //if have bomb
-    
-    //nine block blow player
-    //set status to 0
+    if(bombNum <= 0) return;   //if player don't have bomb, return
+    // nine blocks under player is broken
+    // set block status to 0
     for (int i = y; i < y+3; i++){         
         for (int j = x-1; j < x+2; j++){
             
@@ -117,7 +116,7 @@ void Player::bomb(Map &mp){    //accepts a map parameter
                (mp.mp)[i][j].setStatus(0);  //set status
         }
     }
-    bombNum--;                              //bombNum decrease
+    bombNum--;                              //bombNum decrease by one
 }
 
 //getters and setters
@@ -196,7 +195,7 @@ void Player::setLevel(int level){
 }
 
 
-//time
+
 //time used by timer
 int Player::getTime() const{
 	return time;

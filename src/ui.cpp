@@ -30,12 +30,14 @@ void ui::init(int height_, int width_){
 
 
 int ui::listenKeyboard(){
+    // Return the ASCII code of the key pressed.
     int key = getch();
     if(key < 'a' || key > 'z') return 0;
     return key;
 }
 
 void ui::printStr(const std::string& str, const int y, const int x, const std::string& color){
+    // Print a string at (y, x) with color.
     int num = ui::color_id[color];
     attron(COLOR_PAIR(num));
     mvaddstr(y, x, "                                                                                 ");
@@ -45,6 +47,7 @@ void ui::printStr(const std::string& str, const int y, const int x, const std::s
 }
 
 void ui::drawBorder(){
+    // Draw the border of the game map.
     attron(COLOR_PAIR(9));                      // Set border color
     for(int i = 0; i <= height+1; i++){         // left and right border.
         mvaddch(i, 0, ' ');
@@ -59,17 +62,13 @@ void ui::drawBorder(){
 }
 
 void ui::draw(const std::deque<std::vector<Block>>& mp, const Player& player){
-
-//    fout << mp.size() << " " << mp[0].size() << std::endl;
-//    fout << height << " " << width << std::endl;
-//    endwin();
-//    exit(0);
+    // Draw the game map and the player.
     for(int i = 0; i < height; i++){
         for(int j = 0; j < width; j++){
             char ch;
             std::string id;
-//            fout << i << " " << j << std::endl;
-            if(!mp[i][j].get_status()){             // There is no block.
+
+            if(!mp[i][j].get_status()){             // If no block here, print blank.
                 ch = ' ';
                 id = "blank";
             }

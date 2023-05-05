@@ -17,7 +17,7 @@
 int game(Player &p);
 
 int main(){
-
+    //Initialize the random seed
     srand(time(NULL));
     Player p;                   //define a player
 
@@ -94,7 +94,7 @@ int main(){
 }
 
 int game(Player &p){
-
+    //Game Initialization
     p.setDepth(0);  //new game set depth to 0
     Map mp;         //define game map
 

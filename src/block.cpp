@@ -48,7 +48,7 @@ Block::Block(std::string id_, char appearance_, char breaking_app_, int health_,
     status = status_;
 }
 
-void Block::copy(Block target) { //For gamemap, quickly copy properties to a new block）
+void Block::copy(Block target) { //For game map, quickly copy properties to a new block）
     id = target.id;
     appearance = target.appearance;
     breaking_app = target.breaking_app;
@@ -59,10 +59,13 @@ void Block::copy(Block target) { //For gamemap, quickly copy properties to a new
 
 int Block::attack(int damage) { //Attack the block. Input the damage.
     if (health > 0) {
+        //change the status of the block
         health = health - damage;
+        //if the block is half broken
         if (health<=max_health/2){
         	status=2;
 		}
+        //if the block is broken
         if (health <= 0) {
             status = 0;
             health = 0;
@@ -102,6 +105,7 @@ Block s_4("red",'$','$',1,160,1);
 Block s_5("pink",'$','$',1,320,1);
 Block s_6("cyan",'$','$',1,640,1);
 //obstacles that cannot be broken:
+//add obstacles to prevent the player from destructing the camp base& add playability to main game
 Block ob_0("black",'X','*',999,1,1);    //can't be broke
 Block a("black",'#','#',9999,1,3);      // walls of the camp base
 Block MM("red",'M','M',9999,1,4);       //bomb merchants
