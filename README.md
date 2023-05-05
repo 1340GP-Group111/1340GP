@@ -46,8 +46,8 @@ Blocks | features
 Name | Items |Purpose  
 ---- | ---- | ---- 
 L | Digging equipments| Increase Digging Efficiency and Damage 
-O | Oxygen Pack |Extend the maximum exploration time underground. 
 M |Bomb | Blast through hard rocks 
+O | Oxygen Pack |Extend the maximum exploration time underground 
 A | skins | Change your appearance 
 
 ## Item Prices 
