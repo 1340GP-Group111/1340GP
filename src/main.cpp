@@ -109,7 +109,8 @@ int game(Player &p){
     int lasted_time = end_time-start_time;
 
     ui::draw(mp.mp, p);        //draw gameMap
-//	mp.show_map(p);
+    //mp.show_map(p);
+    
     while(true){               //MAIN WHILE LOOP OF DIGGING
 
         //non-blocking listener
