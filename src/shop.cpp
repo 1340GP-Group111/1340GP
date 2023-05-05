@@ -7,9 +7,7 @@
 #include <cmath>
 
 Shop::Shop(){
-    availableSkins = {'@', '$', '$', '%',
-                      '^'}; // available skins. Only some characters now. We can have "☺","☹","♚","☃","☠"
-    ownedSkins = {'@'}; // owned skins
+    availableSkins = {'@', '$', '$', '%', '^'}; // available skins. Only some characters now. We can have "☺","☹","♚","☃","☠"
     APPEARANCE_PRICE = 1000; // appearance price
     BOMB_PRICE = 50; // bomb price
     ATTACK_PRICE = 500; // attack price
