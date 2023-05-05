@@ -14,16 +14,6 @@ Shop::Shop(){
     TIME_PRICE = 200;// time price, time is priceless lol, time is gold!
 }
 
-void Shop::showShop(Player &player) const{
-    std::cout<<"Welcome to the shop!"<<std::endl; // show shop
-    std::cout<<"You have "<<player.getWealth()<<" coins."<<std::endl; // should add getElement() in player
-    std::cout<<"1. Buy appearance"<<std::endl;
-    std::cout<<"2. Buy bomb: "<<BOMB_PRICE<<" coins."<<std::endl;
-    std::cout<<"3. Buy attack: "<<ATTACK_PRICE<<" coins."<<std::endl;
-    std::cout<<"4. Equip appearance"<<std::endl;
-    std::cout<<"5. Exit"<<std::endl;
-    std::cout<<std::endl;
-}
 
 void Shop::buyAppearance(Player &player){
     char option, choice;  //option is the number of the skin that the user want to buy   choice means whether the player want to buy the skin
@@ -130,10 +120,6 @@ void Shop::buyTime(Player &player, int time){
     }else{
 	ui::printStr( "You don't have enough gold coins. (Price: "+std::to_string(price_o)+" coins)", 16, 1, "white");
     }
-}
-
-void Shop::exitShop(){
-    ui::printStr("Thank you for visiting the shop!", 16, 1, "white");
 }
 
 
