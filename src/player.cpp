@@ -4,100 +4,120 @@
 void Player::move(int direction){
     switch(direction)
     {
-        case 1 : //move left
-            x--;
+        case 1 :                 //move lefe
+            x--;                 //x is the location in horizontal, x-1 move left 1 unit
             break;
-        case 2 : //move down
+
+        case 2 :                 //move down
             //The absolute depth of the player
-            this->depth++;
-            
+                                // y is the location in vertical
+            this->depth++;      //The value of y is always the center of the screen, so only change the depth
             break;
-        case 3 : //move right
-            x++;
+
+        case 3 :                 //move right
+            x++;                 //x is the location in horizontal, x+1 move right 1 unit
             break;
-        default:
+
+        default:                 //default
             break;
     }
 }
 
 //movement(Does not judge whether to the edge)
+//for shop but do not use now
 
-//void Player::move_left() {
-//    if ( x != 0 )
-//        move(1);
-//}
-//
-//void Player::move_down() {
-//    move(2);
-//    this->depth++;
-//}
-//
-//void Player::move_right() {
-//    move(3);
-//}
+void Player::move_left() {
+    if ( x != 0 )
+        move(1);
+}
+
+void Player::move_down() {
+    move(2);
+    this->depth++;
+}
+
+void Player::move_right() {
+    move(3);
+}
 
 //movement(Judging whether to the edge)--refactoring function
 
 void Player::move_left(Map &mp) {
-    //Determine whether the square on the left is broken
-    if(x>0) {
-			Block &target =mp.mp[this->y][this->x-1];//check obstacles
-			if(target.get_status()==0)
-				x=x-1;							//if empty, move left
-			else if(attack(target) == true)
-				x=x-1;							//if attack is successful, move left
-		}
 
+    //Determine whether the square on the left is broken
+
+    if(x>0) {
+			Block &target =mp.mp[this->y][this->x-1];  //check obstacles
+
+			if(target.get_status()==0)
+				x=x-1;							       //if empty, move left
+			else if(attack(target) == true)
+				x=x-1;							       //if attack is successful, move left
+
+		}
 }
 
-void Player::move_down(Map &mp) {
+void Player::move_down(Map &mp) { //accepts a map parameter
+
     //Determine whether the block below is broken
-    Block &target = mp.mp[this->y+1][this->x];
-			if(target.get_status()==0){
-				mp.generateLine(*this); 
+
+    Block &target = mp.mp[this->y+1][this->x];     //The block we are going to attack
+
+			if(target.get_status()==0){            //Is there a block
+                //empty
+                mp.generateLine(*this);            //move
 				depth++;
 			}
-			else if(attack(target) == true){
+			else if(attack(target) == true){        //attack the block
+                //break the block
 				mp.generateLine(*this);
 				depth++;
 			}
 }
 
 void Player::move_right(Map &mp) {
+
     //Determine whether the square on the right is broken
-    if(x<19){ //width
-			Block &target = mp.mp[this->y][this->x+1];//check obstacles
-			if(target.get_status()==0)
+    //Does it reach the edge
+    if(x<19){                    //19 is the width of map
+
+			Block &target = mp.mp[this->y][this->x+1];    //check obstacles
+
+			if(target.get_status()==0)                //Is there a block
+				x=x+1;                                //move
+			else if(attack(target) == true)           //attack the block
 				x=x+1;
-			else if(attack(target) == true)
-				x=x+1;
+
 		}
 }
 
-bool Player::attack(Block& target){ //Deal with the target block
+bool Player::attack(Block& target){                    //Deal with the target block
 
-	int result = target.attack(1);
-	if (result==2){
-		wealth = wealth + target.get_value();
+	int result = target.attack(1);                     //use attack in block.h
+	if (result==2){                                    //break the block
+		wealth = wealth + target.get_value();          //wealth increase, If the block is valuable
 		return true;
-	}
-	else if(result==1){
-		return true;
-	}
-	else return false;
-	}
+	}else if(result==1){                               //did not break the block
+        return true;                                  
+	}                                                  // if return ture than player can move
+	else {return false; }                              //can not move
+}
 
-//player 下面九格status=0
-void Player::bomb(Map &mp){
-    if(bombNum <= 0) return;
-    for (int i = y; i < y+3; i++){
+//use bomb
+void Player::bomb(Map &mp){    //accepts a map parameter
+    
+    if(bombNum <= 0) return;   //if have bomb
+    
+    //nine block blow player
+    //set status to 0
+    for (int i = y; i < y+3; i++){         
         for (int j = x-1; j < x+2; j++){
-            //whether to reach the border
-            if (j>=0 && j<=mp.width)
-               (mp.mp)[i][j].setStatus(0);
+            
+            if (j>=0 && j<=mp.width)        //whether to reach the border
+               (mp.mp)[i][j].setStatus(0);  //set status
         }
     }
-    bombNum--;
+    bombNum--;                              //bombNum decrease
 }
 
 //getters and setters
@@ -177,16 +197,20 @@ void Player::setLevel(int level){
 
 
 //time
+//time used by timer
 int Player::getTime() const{
 	return time;
 }
-void Player::setTime(int t){
-	this->time = t;
+void Player::setTime(int time){
+	this->time = time;
 }
+
 //oxygen
+
 int Player::getOxygen() const{
     return oxygen;
 }
+
 void Player::setOxygen(int oxygen){
     this->oxygen = oxygen;
 }
@@ -196,9 +220,11 @@ void Player::setOxygen(int oxygen){
 int Player::getDepth() const{
     return depth;
 }
+
 void Player::setDepth(int d){
 	this->depth = d;
 }
+
 //skin
 
 std::map <char,int> Player::getSkin() const{
