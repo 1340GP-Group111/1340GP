@@ -150,4 +150,5 @@ ncurses.h
 # Compilation and execution Instructions: 
 
 execute 'make main' 
+	
 use './main' to start the game  
