@@ -2,13 +2,13 @@
  
 # Team members (In alphabetical order): 
 
- Name | UID 
- ---- | ----
-Cao Rui | 3035974303 
-Deng Zihong | 3035962465 
-Duan Xihan | 3035974042 
-Fu Yeqiao | 3035974664 
-He Minggao | 3035973373 
+ Name | UID | Nickname
+ ---- | ---- | ----
+Cao Rui | 3035974303 |
+Deng Zihong | 3035962465 | 
+Duan Xihan | 3035974042 |
+Fu Yeqiao | 3035974664 | fyq5166
+He Minggao | 3035973373 |
 
  
 
