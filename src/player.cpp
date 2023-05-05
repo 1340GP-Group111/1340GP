@@ -170,6 +170,7 @@ int Player::getY() const{
     return y;
 }
 
+//set both x and y
 void Player::setLocation(int x,int y){
     this->x = x;
     this->y = y;
