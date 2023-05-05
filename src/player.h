@@ -9,9 +9,42 @@
 class Map;
 
 class Player{
+    
+private:
 
+    char appearance;          // the skin you are wearing
+    std::map <char,int> skin; // store skin
+    int level;
+    int bombNum;     //how many bombs you have
+    int wealth;      //how much money you have
+    int damage;      //your attack power
+    int oxygen;      //max time
+    int depth;       //absolute depth
+    int x;           //location(horizontal) on the map
+    int y;           //location(vertical) on the map
+    int time;		 //time
+
+    void move(int);  //method move(private)
+
+    //skin initialization(static)
+    static std::map<char, int> skinInt() {
+
+        std::map<char, int> TempMColor;  //temp
+
+        //skin
+        TempMColor.insert(std::pair<char, int>('@',1));   //initial skinI(@)
+        TempMColor.insert(std::pair<char, int>('#',0));   //Purchasable(#) skins not owned
+        TempMColor.insert(std::pair<char, int>('$',0));   //Purchasable($) skins not owned
+        TempMColor.insert(std::pair<char, int>('%',0));   //Purchasable(%) skins not owned
+        TempMColor.insert(std::pair<char, int>('^',0));   //Purchasable(^) skins not owned
+
+        return TempMColor;                //return to Constructor
+
+    }
+    
+    
 public:
-
+    
     //Constructor
     //accept all parameters
     //skin--std::move(std::map <char,int>)
@@ -92,37 +125,6 @@ public:
     //Reset wealth, depth, x, y when starting a new game
     void playerInitialization(Map &mp);
 
-private:
-
-    char appearance;          // the skin you are wearing
-    std::map <char,int> skin; // store skin
-    int level;
-    int bombNum;     //how many bombs you have
-    int wealth;      //how much money you have
-    int damage;      //your attack power
-    int oxygen;      //max time
-    int depth;       //absolute depth
-    int x;           //location(horizontal) on the map
-    int y;           //location(vertical) on the map
-    int time;		 //time
-
-    void move(int);  //method move(private)
-
-    //skin initialization(static)
-    static std::map<char, int> skinInt() {
-
-        std::map<char, int> TempMColor;  //temp
-
-        //skin
-        TempMColor.insert(std::pair<char, int>('@',1));   //initial skinI(@)
-        TempMColor.insert(std::pair<char, int>('#',0));   //Purchasable(#) skins not owned
-        TempMColor.insert(std::pair<char, int>('$',0));   //Purchasable($) skins not owned
-        TempMColor.insert(std::pair<char, int>('%',0));   //Purchasable(%) skins not owned
-        TempMColor.insert(std::pair<char, int>('^',0));   //Purchasable(^) skins not owned
-
-        return TempMColor;                //return to Constructor
-
-    }
 };
 
 #endif
