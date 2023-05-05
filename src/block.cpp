@@ -28,7 +28,7 @@ int Block::get_status() const{
     return status;
 }
 
-Block::Block() {
+Block::Block() {		//Default constructor, generate a normal white block
     id = "white";
     appearance = '#';
     breaking_app = '*';
@@ -38,7 +38,7 @@ Block::Block() {
     status = 1;
 }
 
-Block::Block(std::string id_, char appearance_, char breaking_app_, int health_, int value_, int status_) {
+Block::Block(std::string id_, char appearance_, char breaking_app_, int health_, int value_, int status_) {	//Constructor
     id = id_;
     appearance = appearance_;
     breaking_app = breaking_app_;
@@ -48,7 +48,7 @@ Block::Block(std::string id_, char appearance_, char breaking_app_, int health_,
     status = status_;
 }
 
-void Block::copy(Block target) { //For gamemap, quickly copy property to a block）
+void Block::copy(Block target) { //For gamemap, quickly copy properties to a new block）
     id = target.id;
     appearance = target.appearance;
     breaking_app = target.breaking_app;
