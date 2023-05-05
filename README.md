@@ -1,4 +1,6 @@
 # 1340GP
+# Instructions
+Please adjust the terminal size to at least 106*28 to ensure a normal game experience.
 # Game Introduction
 
 This is an underground adventure game where you play as a miner with the goal of digging as deep as possible before your oxygen runs out. There are two scenes in the game: underground exploration and base camp. In the underground scene, press 'a' and 'd' to dig left or right, and press 's' to dig down. The hardness of the soil will increase with depth, making it more difficult to dig. In the base camp scene, you can move around with 'w', 'a', 's', and 'd', and communicate with the merchant to purchase items.
